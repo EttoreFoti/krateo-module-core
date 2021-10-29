@@ -1,0 +1,44 @@
+apiVersion: meta.pkg.crossplane.io/v1alpha1
+kind: Configuration
+metadata:
+  name: gcp-stack-template-plus
+  annotations:
+    meta.crossplane.io/maintainer: Diego Braga <diego.braga@kiratech,it>
+    meta.crossplane.io/keywords: gcp, google, cloud-native, kubernetes, platform, reference
+    meta.crossplane.io/source: github.com/projectkerberus/gcp-stack-template-plus
+    meta.crossplane.io/license: Apache-2.0
+    meta.crossplane.io/description: |
+      This reference platform Configuration for Kubernetes and Data Services
+      is a starting point to build, run, and operate your own internal cloud
+      platform and offer a self-service console and API to your internal teams.
+
+    meta.crossplane.io/readme: |
+      This reference platform `Configuration` for Kubernetes and Data Services
+      is a starting point to build, run, and operate your own internal cloud
+      platform and offer a self-service console and API to your internal teams.
+
+      It provides platform APIs to provision fully configured GKE clusters,
+      with secure networking, and stateful cloud services (Cloud SQL) designed to
+      securely connect to the nodes in each GKE cluster -- all composed using
+      cloud service primitives from the [Crossplane GCP
+      Provider](https://doc.crds.dev/github.com/crossplane/provider-gcp). App
+      deployments can securely connect to the infrastructure they need using
+      secrets distributed directly to the app namespace.
+
+      [Quickstart
+      Guide](https://github.com/projectkerberus/gcp-stack-template-plus/#quick-start)
+
+      [APIs in this
+      Configuration](https://github.com/projectkerberus/gcp-stack-template-plus/#apis-in-this-configuration)
+
+      To learn more checkout the [GitHub
+      repo](https://github.com/projectkerberus/gcp-stack-template-plus/) that you can copy and
+      customize to meet the exact needs of your organization!
+spec:
+  crossplane:
+    version: ">=v1.0.0-0"
+  dependsOn:
+#    - provider: registry.upbound.io/crossplane/provider-gcp
+#      version: ">=v0.13.0-0"
+    - provider: registry.upbound.io/crossplane/provider-helm
+      version: ">=v0.3.6-0"

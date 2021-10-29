@@ -1,0 +1,36 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+#  name: wordpressclusters.example.crossplane.io
+  name: demostacks.gcp-stack-template-plus.projectkerberus.io
+spec:
+  connectionSecretKeys:
+    - kubeconfig
+#  group: example.crossplane.io
+  group: gcp-stack-template-plus.projectkerberus.io
+  names:
+#    kind: WordpressCluster
+#    listKind: WordpressClusterList
+#    plural: wordpressclusters
+#    singular: wordpresscluster
+    kind: DemoStack
+    listKind: DemoStackList
+    plural: demostacks
+    singular: demostack
+  versions:
+    - name: v1alpha1
+      served: true
+      referenceable: true
+      schema:
+        openAPIV3Schema:
+          description: A stack based on a GKE Cluster, Network, a CloudSQLInstance ready to host cloud native apps
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                clusterVersion:
+                  type: string
+                  description: GKE cluster version
+              required:
+                - clusterVersion
