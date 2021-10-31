@@ -1,231 +1,17 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-#  name: wordpressclusters.example.crossplane.io
-  name: demostacks.gcp-stack-template-plus.projectkerberus.io
+#  name: demostacks.gcp-stack-template-plus.projectkerberus.io
+  name: core.modules.krateoplatformops.io
 spec:
-  writeConnectionSecretsToNamespace: crossplane-system
+#  writeConnectionSecretsToNamespace: crossplane-system
+  writeConnectionSecretsToNamespace: krateo-system
   compositeTypeRef:
-#    apiVersion: example.crossplane.io/v1alpha1
-    apiVersion: gcp-stack-template-plus.projectkerberus.io/v1alpha1
-#    kind: WordpressCluster
-    kind: DemoStack
+#    apiVersion: gcp-stack-template-plus.projectkerberus.io/v1alpha1
+    apiVersion: modules.krateoplatformops.io/v1alpha1
+#    kind: DemoStack
+    kind: Core
   resources:
-    - base:
-        apiVersion: gcp.crossplane.io/v1beta1
-        kind: ProviderConfig
-        spec:
-          # replace this with your own gcp project id
-          projectID: kerberusdemo
-          credentials:
-            source: Secret
-            secretRef:
-              namespace: crossplane-system
-              name: gcp-creds
-              key: credentials
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gcp-providerconfig"
-    - base:
-        apiVersion: compute.gcp.crossplane.io/v1beta1
-        kind: Network
-        spec:
-          forProvider:
-            autoCreateSubnetworks: false
-            routingConfig:
-              routingMode: REGIONAL
-#          providerConfigRef:
-#            name: gcp-stack-template-plus-provider
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gcp-providerconfig"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-nw"
-    - base:
-        apiVersion: container.gcp.crossplane.io/v1beta1
-        kind: GKECluster
-        spec:
-          forProvider:
-            addonsConfig:
-              kubernetesDashboard:
-                disabled: true
-              networkPolicyConfig:
-                disabled: false
-            databaseEncryption:
-              state: DECRYPTED
-            defaultMaxPodsConstraint:
-              maxPodsPerNode: 110
-            description: Host Cluster instance of basic tier
-            ipAllocationPolicy:
-              createSubnetwork: true
-              useIpAliases: true
-            networkPolicy:
-              enabled: true
-            legacyAbac:
-              enabled: false
-            podSecurityPolicyConfig:
-              enabled: false
-            verticalPodAutoscaling:
-              enabled: true
-            masterAuth:
-              username: admin
-            loggingService: logging.googleapis.com/kubernetes
-            monitoringService: monitoring.googleapis.com/kubernetes
-            networkSelector:
-              matchControllerRef: true
-            location: us-central1
-            locations:
-              - us-central1-a
-              - us-central1-f
-          writeConnectionSecretToRef:
-            namespace: crossplane-system
-#          providerConfigRef:
-#            name: gcp-stack-template-plus-provider
-      patches:
-#        - fromFieldPath: "metadata.name"
-#          toFieldPath: "metadata.annotations[crossplane.io/external-name]"
-#          transforms:
-#            - type: string
-#              string:
-#                fmt: "hc-%s"
-#        - fromFieldPath: "metadata.labels"
-#          toFieldPath: "metadata.labels"
-#        - fromFieldPath: "metadata.annotations[crossplane.io/external-name]"
-#          toFieldPath: "metadata.annotations[crossplane.io/external-name]"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: "spec.writeConnectionSecretToRef.name"
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gkecluster-kubeconfig"
-        - fromFieldPath: "spec.clusterVersion"
-          toFieldPath: "spec.forProvider.initialClusterVersion"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gkecluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gcp-providerconfig"
-        - type: ToCompositeFieldPath
-          fromFieldPath: spec.status.atProvider.endpoint
-          toFieldPath: gkecluster.endpoint
-      connectionDetails:
-        - fromConnectionSecretKey: kubeconfig
-    - base:
-        apiVersion: container.gcp.crossplane.io/v1alpha1
-        kind: NodePool
-        spec:
-          forProvider:
-            initialNodeCount: 1
-            locations:
-              - us-central1-a
-              - us-central1-f
-            autoscaling:
-              enabled: true
-              minNodeCount: 1
-              maxNodeCount: 10
-            config:
-              diskSizeGb: 100
-              diskType: pd-standard
-              imageType: COS
-              machineType: n1-standard-4
-              metadata:
-                disable-legacy-endpoints: "true"
-              oauthScopes:
-                - https://www.googleapis.com/auth/devstorage.read_only
-                - https://www.googleapis.com/auth/logging.write
-                - https://www.googleapis.com/auth/monitoring
-                - https://www.googleapis.com/auth/servicecontrol
-                - https://www.googleapis.com/auth/service.management.readonly
-                - https://www.googleapis.com/auth/trace.append
-                - https://www.googleapis.com/auth/cloud-platform
-              preemptible: false
-              serviceAccount: default
-              shieldedInstanceConfig:
-                enableIntegrityMonitoring: true
-                enableSecureBoot: true
-            clusterSelector:
-              matchControllerRef: true
-            management:
-              autoRepair: true
-              autoUpgrade: true
-            maxPodsConstraint:
-              maxPodsPerNode: 110
-#          providerConfigRef:
-#            name: gcp-stack-template-plus-provider
-      patches:
-        - fromFieldPath: "spec.clusterVersion"
-          toFieldPath: "spec.forProvider.version"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gkecluster-np"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gcp-providerconfig"
-    - base:
-        apiVersion: database.gcp.crossplane.io/v1beta1
-        kind: CloudSQLInstance
-        spec:
-          forProvider:
-            databaseVersion: MYSQL_5_6
-            region: us-central1
-            settings:
-              tier: db-custom-1-3840
-              dataDiskType: PD_SSD
-              ipConfiguration:
-                ipv4Enabled: true
-                authorizedNetworks:
-                  - value: "0.0.0.0/0"
-#          providerConfigRef:
-#            name: gcp-stack-template-plus-provider
-          writeConnectionSecretToRef:
-            namespace: crossplane-system
-      patches:
-#        - fromFieldPath: "metadata.uid"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: "spec.writeConnectionSecretToRef.name"
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-#        - fromFieldPath: "spec.parameters.storageGB"
-#          toFieldPath: "spec.forProvider.settings.dataDiskSizeGb"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gcp-providerconfig"
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: ProviderConfig
@@ -233,7 +19,7 @@ spec:
           credentials:
             source: Secret
             secretRef:
-              namespace: crossplane-system
+              namespace: krateo-system
               key: kubeconfig
       patches:
         - fromFieldPath: metadata.name
@@ -242,16 +28,58 @@ spec:
             - type: string
               string:
                 fmt: "%s-helm-providerconfig"
-        # This ProviderConfig uses the above GKECluster's connection secret as
-        # its credentials secret.
         - fromFieldPath: "metadata.name"
           toFieldPath: spec.credentials.secretRef.name
           transforms:
             - type: string
               string:
-                fmt: "%s-gkecluster-kubeconfig"
+                fmt: "%s-krateo-kubeconfig"
       readinessChecks:
         - type: None
+    - base:
+        apiVersion: argocd.projectkerberus.io/v1alpha1
+        kind: ProviderConfig
+        metadata:
+          name: argocd-provider-config
+        spec:
+          serverAddr: argocd-server.argocd.svc:443
+          insecure: true
+          # port forward is useful during development
+          credentials:
+            source: Secret
+            secretRef:
+              namespace: krateo-system
+              name: argocd-credentials
+              key: authToken
+    - base:
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: argocd-cm
+          namespace: krateo-system
+          labels:
+            app.kubernetes.io/name: argocd-cm
+            app.kubernetes.io/part-of: argocd
+        data:
+          # add an additional local user with apiKey and login capabilities
+          #   apiKey - allows generating API keys
+          #   login - allows to login using UI
+          accounts.kerberus-dashboard: apiKey, login
+    - base:
+        apiVersion: tokens.argocd.projectkerberus.io/v1alpha1
+        kind: Token
+        metadata:
+          name: argocd-kerberus-dashboard-credentials
+        spec:
+          forProvider:
+            expiresIn: 0s
+            account: kerberus-dashboard
+            writeTokenSecretToRef:
+              name: argocd-kerberus-dashboard-credentials
+              key: authToken
+              namespace: krateo-system
+          providerConfigRef:
+            name: argocd-provider-config
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
@@ -261,35 +89,10 @@ spec:
         spec:
           forProvider:
             chart:
-              name: renomy-app-template-secret
-              repository: http://krateo.io/renomy-app-template-secret
-              version: 0.1.4
-            namespace: renomy-app-template-ns
-            set:
-              - name: endpoint
-                valueFrom:
-                  secretKeyRef:
-                    name:
-                    namespace: crossplane-system
-                    key: endpoint
-              - name: publicIP
-                valueFrom:
-                  secretKeyRef:
-                    name:
-                    namespace: crossplane-system
-                    key: publicIP
-              - name: username
-                valueFrom:
-                  secretKeyRef:
-                    name:
-                    namespace: crossplane-system
-                    key: username
-              - name: password
-                valueFrom:
-                  secretKeyRef:
-                    name:
-                    namespace: crossplane-system
-                    key: password
+              name: provider-argocd
+              repository: https://projectkerberus.io/provider-argocd-helm
+              version: 0.2.0
+            namespace: krateo-system
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
@@ -297,107 +100,3 @@ spec:
             - type: string
               string:
                 fmt: "%s-helm-providerconfig"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.forProvider.set[0].valueFrom.secretKeyRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.forProvider.set[1].valueFrom.secretKeyRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.forProvider.set[2].valueFrom.secretKeyRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.forProvider.set[3].valueFrom.secretKeyRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-cloudsql"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-helm-template-secret"
-    - base:
-        apiVersion: v1
-        kind: ServiceAccount
-        metadata:
-          name: argocd-manager
-          namespace: kube-system
-    - base:
-        apiVersion: rbac.authorization.k8s.io/v1
-        kind: ClusterRole
-        metadata:
-          name: argocd-manager-role
-        rules:
-          - apiGroups:
-            - '*'
-            resources:
-            - '*'
-            verbs:
-            - '*'
-          - nonResourceURLs:
-            - '*'
-            verbs:
-            - '*'
-    - base:
-        apiVersion: rbac.authorization.k8s.io/v1
-        kind: ClusterRoleBinding
-        metadata:
-          name: argocd-manager-role-binding
-        roleRef:
-          apiGroup: rbac.authorization.k8s.io
-          kind: ClusterRole
-          name: argocd-manager-role
-        subjects:
-          - kind: ServiceAccount
-            name: argocd-manager
-            namespace: kube-system
-    - base:
-        apiVersion: v1
-        kind: Secret
-        metadata:
-#          name: gke-eu1
-          labels:
-            argocd.argoproj.io/secret-type: cluster
-        type: Opaque
-#        stringData:
-#          name: gke-eu1
-#          server: https://gke-eu1.inlets:443
-#          config: |
-#            {
-#              "bearerToken": "${token}",
-#              "tlsClientConfig": {
-#                "insecure": true
-#              }
-#            }
-      patches:
-        - fromFieldPath: gkecluster.endpoint
-          toFieldPath: stringData.server
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gkecluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: stringData.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-gkecluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: stringData.name
-          transforms:
-            - type: string
-              string:
-                fmt: "{ \"bearerToken\": \"%s\", \"tlsClientConfig\": { \"insecure\": true }}"
