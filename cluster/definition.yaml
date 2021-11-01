@@ -14,6 +14,9 @@ spec:
 #    plural: demostacks
 #    singular: demostack
     kind: Core
+    listKind: CoreList
+    plural: core
+    singular: core
   versions:
     - name: v1alpha1
       served: true
