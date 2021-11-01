@@ -13,30 +13,6 @@ spec:
     kind: Core
   resources:
     - base:
-        apiVersion: helm.crossplane.io/v1beta1
-        kind: ProviderConfig
-        spec:
-          credentials:
-            source: Secret
-            secretRef:
-              namespace: krateo-system
-              key: kubeconfig
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-helm-providerconfig"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.credentials.secretRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-krateo-kubeconfig"
-      readinessChecks:
-        - type: None
-    - base:
         apiVersion: argocd.projectkerberus.io/v1alpha1
         kind: ProviderConfig
         metadata:
@@ -80,6 +56,30 @@ spec:
               namespace: krateo-system
           providerConfigRef:
             name: argocd-provider-config
+    - base:
+        apiVersion: helm.crossplane.io/v1beta1
+        kind: ProviderConfig
+        spec:
+          credentials:
+            source: Secret
+            secretRef:
+              namespace: krateo-system
+              key: kubeconfig
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-helm-providerconfig"
+        - fromFieldPath: "metadata.name"
+          toFieldPath: spec.credentials.secretRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-krateo-kubeconfig"
+      readinessChecks:
+        - type: None
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
