@@ -74,14 +74,11 @@ spec:
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
-#        metadata:
-#          annotations:
-#            crossplane.io/external-name: wordpress
         spec:
           forProvider:
             chart:
               name: provider-argocd
-              repository: https://projectkerberus.io/provider-argocd-helm
+              repository: https://krateo.io/runtime-helm-charts
               version: 0.2.0
             namespace: krateo-system
       patches:
