@@ -25,12 +25,12 @@ spec:
         openAPIV3Schema:
           description: Core module of Krateo PlatformOps
           type: object
-#          properties:
-#            spec:
-#              type: object
-#              properties:
-#                argocdVersion:
-#                  type: string
-#                  description: ArgoCD version
+          properties:
+            spec:
+              type: object
+              properties:
+                argocdVersion:
+                  type: string
+                  description: ArgoCD version
 #              required:
 #                - clusterVersion
