@@ -61,10 +61,7 @@ spec:
         kind: ProviderConfig
         spec:
           credentials:
-            source: Secret
-            secretRef:
-              namespace: krateo-system
-              key: kubeconfig
+            source: InjectedIdentity
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -72,12 +69,6 @@ spec:
             - type: string
               string:
                 fmt: "%s-helm-providerconfig"
-        - fromFieldPath: "metadata.name"
-          toFieldPath: spec.credentials.secretRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-krateo-kubeconfig"
       readinessChecks:
         - type: None
     - base:
