@@ -49,26 +49,46 @@ spec:
             - type: string
               string:
                 fmt: "%s-helm-providerconfig-incluster"
+    # - base:
+    #     apiVersion: helm.crossplane.io/v1beta1
+    #     kind: Release
+    #     spec:
+    #       forProvider:
+    #         chart:
+    #           name: provider-argocd
+    #           repository: https://krateo.io/runtime-helm-charts
+    #           version: 0.0.0
+    #         namespace: krateo-system
+    #         values:
+    #           serviceAccount.create: false
+    #           name: crossplane
+    #   patches:
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-helm-providerconfig-incluster"
     - base:
-        apiVersion: helm.crossplane.io/v1beta1
-        kind: Release
+        apiVersion: pkg.crossplane.io/v1alpha1
+        kind: ControllerConfig
+        metadata:
+          name: debug-config
         spec:
-          forProvider:
-            chart:
-              name: provider-argocd
-              repository: https://krateo.io/runtime-helm-charts
-              version: 0.0.0
-            namespace: krateo-system
-            values:
-              serviceAccount.create: false
-              name: crossplane
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-helm-providerconfig-incluster"
+          args:
+            - --debug
+    - base:
+        apiVersion: pkg.crossplane.io/v1
+        kind: Provider
+        metadata:
+          name: provider-argocd
+        spec:
+          package: 'ghcr.io/projectkerberus/xp-provider-argocd:0.2.0'
+          packagePullPolicy: IfNotPresent
+          packagePullSecrets:
+          - name: cr-token
+          controllerConfigRef:
+            name: debug-config
     - base:
         apiVersion: argocd.projectkerberus.io/v1alpha1
         kind: ProviderConfig
