@@ -81,6 +81,13 @@ spec:
               namespace: krateo-system
               name: argocd-credentials
               key: authToken
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-providerconfig"
     - base:
         apiVersion: v1
         kind: ConfigMap
@@ -110,3 +117,10 @@ spec:
               namespace: krateo-system
           providerConfigRef:
             name: argocd-provider-config
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-providerconfig"
