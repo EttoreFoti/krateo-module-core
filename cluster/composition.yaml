@@ -59,6 +59,9 @@ spec:
               repository: https://krateo.io/runtime-helm-charts
               version: 0.0.0
             namespace: krateo-system
+            values:
+              serviceAccount.create: false
+              name: crossplane
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
@@ -115,8 +118,8 @@ spec:
               name: argocd-kerberus-dashboard-credentials
               key: authToken
               namespace: krateo-system
-          providerConfigRef:
-            name: argocd-provider-config
+#          providerConfigRef:
+#            name: argocd-provider-config
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
