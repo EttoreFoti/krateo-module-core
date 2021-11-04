@@ -89,6 +89,13 @@ spec:
           - name: cr-token
 #          controllerConfigRef:
 #            name: debug-config
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-provider"
     - base:
         apiVersion: argocd.projectkerberus.io/v1alpha1
         kind: ProviderConfig
