@@ -12,11 +12,11 @@ spec:
 #    kind: DemoStack
     kind: Core
   resources:
-    - base:
-        apiVersion: v1
-        kind: Namespace
-        metadata:
-          name: krateo-system
+    # - base:
+    #     apiVersion: v1
+    #     kind: Namespace
+    #     metadata:
+    #       name: krateo-system
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: ProviderConfig
