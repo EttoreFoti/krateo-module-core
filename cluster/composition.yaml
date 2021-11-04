@@ -69,14 +69,21 @@ spec:
     #         - type: string
     #           string:
     #             fmt: "%s-helm-providerconfig-incluster"
-    # - base:
-    #     apiVersion: pkg.crossplane.io/v1alpha1
-    #     kind: ControllerConfig
-    #     metadata:
-    #       name: debug-config
-    #     spec:
-    #       args:
-    #         - --debug
+    - base:
+        apiVersion: pkg.crossplane.io/v1alpha1
+        kind: ControllerConfig
+        # metadata:
+        #   name: debug-config
+        spec:
+          args:
+            - --debug
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-provider-controllerconfig"
     - base:
         apiVersion: pkg.crossplane.io/v1
         kind: Provider
@@ -86,9 +93,9 @@ spec:
           package: 'ghcr.io/projectkerberus/xp-provider-argocd:0.2.0'
           packagePullPolicy: Always
           packagePullSecrets:
-          - name: cr-token
-#          controllerConfigRef:
-#            name: debug-config
+            - name: cr-token
+          # controllerConfigRef:
+          #   name: debug-config
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -96,6 +103,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-provider"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.controllerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-provider-controllerconfig"
     - base:
         apiVersion: argocd.projectkerberus.io/v1alpha1
         kind: ProviderConfig
