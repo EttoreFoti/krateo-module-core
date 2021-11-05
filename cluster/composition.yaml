@@ -90,7 +90,7 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: 'ghcr.io/projectkerberus/xp-provider-argocd:0.2.0'
+          package: 'ghcr.io/krateoplatformops/xp-provider-argocd-token:0.1.0'
           packagePullPolicy: Always
           packagePullSecrets:
             - name: cr-token
@@ -109,21 +109,35 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-provider-controllerconfig"
+    # - base:
+    #     apiVersion: argocd.projectkerberus.io/v1alpha1
+    #     kind: ProviderConfig
+    #     metadata:
+    #       name: argocd-provider-config
+    #     spec:
+    #       serverAddr: argocd-server.argocd.svc:443
+    #       insecure: true
+    #       # port forward is useful during development
+    #       credentials:
+    #         source: Secret
+    #         secretRef:
+    #           namespace: krateo-system
+    #           name: argocd-credentials
+    #           key: authToken
     - base:
-        apiVersion: argocd.projectkerberus.io/v1alpha1
+        apiVersion: argocd.krateoplatformops.io/v1alpha1
         kind: ProviderConfig
         metadata:
           name: argocd-provider-config
         spec:
           serverAddr: argocd-server.argocd.svc:443
           insecure: true
-          # port forward is useful during development
           credentials:
             source: Secret
             secretRef:
               namespace: krateo-system
-              name: argocd-credentials
-              key: authToken
+              name: argocd-initial-admin-secret
+              key: password
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -145,21 +159,34 @@ spec:
           #   apiKey - allows generating API keys
           #   login - allows to login using UI
           accounts.kerberus-dashboard: apiKey, login
+    # - base:
+    #     apiVersion: tokens.argocd.projectkerberus.io/v1alpha1
+    #     kind: Token
+    #     metadata:
+    #       name: argocd-kerberus-dashboard-credentials
+    #     spec:
+    #       forProvider:
+    #         expiresIn: 0s
+    #         account: kerberus-dashboard
+    #         writeTokenSecretToRef:
+    #           name: argocd-kerberus-dashboard-credentials
+    #           key: authToken
+    #           namespace: krateo-system
     - base:
-        apiVersion: tokens.argocd.projectkerberus.io/v1alpha1
+        apiVersion: tokens.argocd.krateoplatformops.io/v1alpha1
         kind: Token
         metadata:
-          name: argocd-kerberus-dashboard-credentials
+          name: krateo-dashboard-argocd-token
         spec:
           forProvider:
             expiresIn: 0s
-            account: kerberus-dashboard
+            account: krateo-dashboard
             writeTokenSecretToRef:
-              name: argocd-kerberus-dashboard-credentials
+              name: krateo-dashboard-argocd-token
               key: authToken
               namespace: krateo-system
-#          providerConfigRef:
-#            name: argocd-provider-config
+          # providerConfigRef:
+          #   name: argocd-provider-config
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
