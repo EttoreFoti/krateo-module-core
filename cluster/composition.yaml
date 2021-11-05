@@ -156,9 +156,9 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-providerconfig"
-
         - fromFieldPath: metadata.name
           toFieldPath: spec.serverAddr
+          transforms:
             - type: string
               string:
                 fmt: "%s-argocd-server.krateo-system.svc:443"
