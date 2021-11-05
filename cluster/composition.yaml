@@ -35,6 +35,9 @@ spec:
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
+        # metadata:
+        #   annotations:
+        #     crossplane.io/external-name:
         spec:
           forProvider:
             chart:
@@ -55,6 +58,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-release"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.annotations.crossplane.io/external-name
     # - base:
     #     apiVersion: helm.crossplane.io/v1beta1
     #     kind: Release
