@@ -35,14 +35,6 @@ spec:
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
-        metadata:
-          # name: argocd-release
-          annotations:
-            # The external name annotation has special meaning in Crossplane. When a
-            # claim creates an XR its external name will automatically be propagated to
-            # the XR. Whether and how the external name is propagated to the resources
-            # the XR composes is up to its Composition.
-            crossplane.io/external-name: argocd-release
         spec:
           forProvider:
             chart:
@@ -57,6 +49,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-helm-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-release"
     # - base:
     #     apiVersion: helm.crossplane.io/v1beta1
     #     kind: Release
