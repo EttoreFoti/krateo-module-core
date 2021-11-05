@@ -35,6 +35,8 @@ spec:
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
+        metadata:
+          name: argocd-release
         spec:
           forProvider:
             chart:
