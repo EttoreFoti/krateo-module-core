@@ -141,7 +141,7 @@ spec:
         metadata:
           name: argocd-provider-config
         spec:
-          serverAddr: argocd-server.argocd.svc:443
+#          serverAddr: argocd-server.argocd.svc:443
           insecure: true
           credentials:
             source: Secret
@@ -156,6 +156,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-providerconfig"
+
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.serverAddr
+            - type: string
+              string:
+                fmt: "%s-argocd-server.krateo-system.svc:443"
     - base:
         apiVersion: v1
         kind: ConfigMap
