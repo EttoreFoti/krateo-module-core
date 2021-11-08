@@ -38,8 +38,9 @@ spec:
               version: 3.26.5
             namespace: krateo-system
             values:
-              config:
-                accounts.krateo-dashboard: apiKey, login
+              server:
+                config:
+                  accounts.krateo-dashboard: apiKey, login
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
