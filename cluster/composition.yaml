@@ -153,3 +153,56 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-providerconfig"
+    - base:
+        apiVersion: helm.crossplane.io/v1beta1
+        kind: Release
+        spec:
+          forProvider:
+            chart:
+              name: kerberus-dashboard
+              repository: https://projectkerberus.github.io/kerberus-dashboard/
+              # version: 3.26.5
+            namespace: krateo-system
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-helm-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-krateodashboard-release"
+        - fromFieldPath: "spec.organization"
+          toFieldPath: "spec.forProvider.values.organization"
+        - fromFieldPath: "spec.frontendUrl"
+          toFieldPath: "spec.forProvider.values.frontendUrl"
+        - fromFieldPath: "spec.backendUrl"
+          toFieldPath: "spec.forProvider.values.backendUrl"
+        - fromFieldPath: "spec.sonarqube.token"
+          toFieldPath: "spec.forProvider.values.sonarqube.token"
+        - fromFieldPath: "spec.grafana.target"
+          toFieldPath: "spec.forProvider.values.grafana.target"
+        - fromFieldPath: "spec.grafana.token"
+          toFieldPath: "spec.forProvider.values.grafana.token"
+        - fromFieldPath: "spec.prometheus.target"
+          toFieldPath: "spec.forProvider.values.prometheus.target"
+        - fromFieldPath: "spec.providers.github.token"
+          toFieldPath: "spec.forProvider.values.github.token"
+        - fromFieldPath: "spec.providers.github.clientId"
+          toFieldPath: "spec.forProvider.values.github.clientId"
+        - fromFieldPath: "spec.providers.github.clientSecret"
+          toFieldPath: "spec.forProvider.values.github.clientSecret"
+        - fromFieldPath: "spec.kubernetes.customResources"
+          toFieldPath: "spec.forProvider.values.kubernetes.customResources"
+        - fromFieldPath: "spec.kubernetes.clusters"
+          toFieldPath: "spec.forProvider.values.kubernetes.clusters"
+         - fromFieldPath: "spec.auth.github.token"
+           toFieldPath: "spec.forProvider.values.auth.github.token"
+         - fromFieldPath: "spec.auth.github.clientId"
+           toFieldPath: "spec.forProvider.values.auth.github.clientId"
+         - fromFieldPath: "spec.auth.github.clientSecret"
+           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
