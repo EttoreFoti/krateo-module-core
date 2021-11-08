@@ -12,11 +12,6 @@ spec:
 #    kind: DemoStack
     kind: Core
   resources:
-    # - base:
-    #     apiVersion: v1
-    #     kind: Namespace
-    #     metadata:
-    #       name: krateo-system
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: ProviderConfig
@@ -35,9 +30,6 @@ spec:
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
-        # metadata:
-        #   annotations:
-        #     crossplane.io/external-name:
         spec:
           forProvider:
             chart:
@@ -60,31 +52,9 @@ spec:
                 fmt: "%s-argocd-release"
         - fromFieldPath: metadata.name
           toFieldPath: metadata.annotations[crossplane.io/external-name]
-    # - base:
-    #     apiVersion: helm.crossplane.io/v1beta1
-    #     kind: Release
-    #     spec:
-    #       forProvider:
-    #         chart:
-    #           name: provider-argocd
-    #           repository: https://krateo.io/runtime-helm-charts
-    #           version: 0.0.0
-    #         namespace: krateo-system
-    #         values:
-    #           serviceAccount.create: false
-    #           name: crossplane
-    #   patches:
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: spec.providerConfigRef.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-helm-providerconfig-incluster"
     - base:
         apiVersion: pkg.crossplane.io/v1alpha1
         kind: ControllerConfig
-        # metadata:
-        #   name: debug-config
         spec:
           args:
             - --debug
@@ -105,8 +75,6 @@ spec:
           packagePullPolicy: Always
           packagePullSecrets:
             - name: cr-token
-          # controllerConfigRef:
-          #   name: debug-config
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -120,21 +88,6 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-provider-controllerconfig"
-    # - base:
-    #     apiVersion: argocd.projectkerberus.io/v1alpha1
-    #     kind: ProviderConfig
-    #     metadata:
-    #       name: argocd-provider-config
-    #     spec:
-    #       serverAddr: argocd-server.argocd.svc:443
-    #       insecure: true
-    #       # port forward is useful during development
-    #       credentials:
-    #         source: Secret
-    #         secretRef:
-    #           namespace: krateo-system
-    #           name: argocd-credentials
-    #           key: authToken
     - base:
         apiVersion: argocd.krateoplatformops.io/v1alpha1
         kind: ProviderConfig
@@ -162,33 +115,20 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd-server.krateo-system.svc:443"
-    - base:
-        apiVersion: v1
-        kind: ConfigMap
-        metadata:
-          name: argocd-cm
-          namespace: krateo-system
-          labels:
-            app.kubernetes.io/name: argocd-cm
-            app.kubernetes.io/part-of: argocd
-        data:
-          # add an additional local user with apiKey and login capabilities
-          #   apiKey - allows generating API keys
-          #   login - allows to login using UI
-          accounts.krateo-dashboard: apiKey, login
     # - base:
-    #     apiVersion: tokens.argocd.projectkerberus.io/v1alpha1
-    #     kind: Token
+    #     apiVersion: v1
+    #     kind: ConfigMap
     #     metadata:
-    #       name: argocd-kerberus-dashboard-credentials
-    #     spec:
-    #       forProvider:
-    #         expiresIn: 0s
-    #         account: kerberus-dashboard
-    #         writeTokenSecretToRef:
-    #           name: argocd-kerberus-dashboard-credentials
-    #           key: authToken
-    #           namespace: krateo-system
+    #       name: argocd-cm
+    #       namespace: krateo-system
+    #       labels:
+    #         app.kubernetes.io/name: argocd-cm
+    #         app.kubernetes.io/part-of: argocd
+    #     data:
+    #       # add an additional local user with apiKey and login capabilities
+    #       #   apiKey - allows generating API keys
+    #       #   login - allows to login using UI
+    #       accounts.krateo-dashboard: apiKey, login
     - base:
         apiVersion: tokens.argocd.krateoplatformops.io/v1alpha1
         kind: Token
@@ -202,8 +142,6 @@ spec:
               name: krateo-dashboard-argocd-token
               key: authToken
               namespace: krateo-system
-          # providerConfigRef:
-          #   name: argocd-provider-config
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
