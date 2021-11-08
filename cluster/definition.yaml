@@ -28,10 +28,10 @@ spec:
           properties:
             spec:
               type: object
-              properties:
-                organization:
-                  description: Organization
-                  type: string
+              # properties:
+              #   organization:
+              #     description: Organization
+              #     type: string
                 # frontendUrl:
                 #   description: Kerberus Dashboard frontend url
                 #   type: string
