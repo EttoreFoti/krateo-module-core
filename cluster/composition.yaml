@@ -37,6 +37,9 @@ spec:
               repository: https://argoproj.github.io/argo-helm
               version: 3.26.5
             namespace: krateo-system
+            values:
+              config:
+                accounts.krateo-dashboard: apiKey, login
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
