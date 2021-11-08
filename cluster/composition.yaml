@@ -175,7 +175,7 @@ spec:
           # add an additional local user with apiKey and login capabilities
           #   apiKey - allows generating API keys
           #   login - allows to login using UI
-          accounts.kerberus-dashboard: apiKey, login
+          accounts.krateo-dashboard: apiKey, login
     # - base:
     #     apiVersion: tokens.argocd.projectkerberus.io/v1alpha1
     #     kind: Token
