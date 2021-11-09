@@ -24,3 +24,5 @@ spec:
   dependsOn:
     - provider: registry.upbound.io/crossplane/provider-helm
       version: ">=v0.9.0-0"
+    - provider: ghcr.io/krateoplatformops/krateoruntime-provider-argocd:0.1.0
+      version: ">=v0.1.0-0"

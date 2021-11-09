@@ -75,10 +75,10 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: 'ghcr.io/krateoplatformops/xp-provider-argocd-token:0.1.0'
+          package: 'ghcr.io/krateoplatformops/krateoruntime-provider-argocd:0.1.0'
           packagePullPolicy: Always
-          packagePullSecrets:
-            - name: cr-token
+          # packagePullSecrets:
+          #   - name: cr-token
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
@@ -159,9 +159,9 @@ spec:
         spec:
           forProvider:
             chart:
-              name: kerberus-dashboard
-              repository: https://projectkerberus.github.io/kerberus-dashboard/
-              # version: 3.26.5
+              name: krateo-dashboard
+              repository: https://github.com/krateoplatformops/krateo-dashboard
+              version: 0.3.99
             namespace: krateo-system
       patches:
         - fromFieldPath: metadata.name
