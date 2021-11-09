@@ -160,7 +160,7 @@ spec:
           forProvider:
             chart:
               name: krateo-dashboard
-              repository: https://krateoplatformops.github.com/krateo-dashboard
+              repository: https://krateoplatformops.github.io/krateo-dashboard
               version: 0.3.99
             namespace: krateo-system
       patches:
