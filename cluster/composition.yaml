@@ -2,13 +2,13 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
 #  name: demostacks.gcp-stack-template-plus.projectkerberus.io
-  name: core.modules.krateoplatformops.io
+  name: core.modules.krateo.io
 spec:
 #  writeConnectionSecretsToNamespace: crossplane-system
   writeConnectionSecretsToNamespace: krateo-system
   compositeTypeRef:
 #    apiVersion: gcp-stack-template-plus.projectkerberus.io/v1alpha1
-    apiVersion: modules.krateoplatformops.io/v1alpha1
+    apiVersion: modules.krateo.io/v1alpha1
 #    kind: DemoStack
     kind: Core
   resources:
@@ -75,7 +75,7 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: 'ghcr.io/krateoplatformops/xp-provider-argocd-token:0.1.0'
+          package: 'ghcr.io/krateo/xp-provider-argocd-token:0.1.0'
           packagePullPolicy: Always
           packagePullSecrets:
             - name: cr-token
@@ -93,7 +93,7 @@ spec:
               string:
                 fmt: "%s-argocd-provider-controllerconfig"
     - base:
-        apiVersion: argocd.krateoplatformops.io/v1alpha1
+        apiVersion: argocd.krateo.io/v1alpha1
         kind: ProviderConfig
         metadata:
           name: argocd-provider-config
@@ -134,7 +134,7 @@ spec:
     #       #   login - allows to login using UI
     #       accounts.krateo-dashboard: apiKey, login
     - base:
-        apiVersion: tokens.argocd.krateoplatformops.io/v1alpha1
+        apiVersion: tokens.argocd.krateo.io/v1alpha1
         kind: Token
         metadata:
           name: krateo-dashboard-argocd-token
@@ -200,9 +200,9 @@ spec:
           toFieldPath: "spec.forProvider.values.kubernetes.customResources"
         - fromFieldPath: "spec.kubernetes.clusters"
           toFieldPath: "spec.forProvider.values.kubernetes.clusters"
-         - fromFieldPath: "spec.auth.github.token"
-           toFieldPath: "spec.forProvider.values.auth.github.token"
-         - fromFieldPath: "spec.auth.github.clientId"
-           toFieldPath: "spec.forProvider.values.auth.github.clientId"
-         - fromFieldPath: "spec.auth.github.clientSecret"
-           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
+        - fromFieldPath: "spec.auth.github.token"
+          toFieldPath: "spec.forProvider.values.auth.github.token"
+        - fromFieldPath: "spec.auth.github.clientId"
+          toFieldPath: "spec.forProvider.values.auth.github.clientId"
+        - fromFieldPath: "spec.auth.github.clientSecret"
+          toFieldPath: "spec.forProvider.values.auth.github.clientSecret"

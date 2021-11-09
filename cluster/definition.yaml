@@ -1,28 +1,133 @@
+---
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: core.modules.krateoplatformops.io
+  name: core.modules.krateo.io
 spec:
   connectionSecretKeys:
     - kubeconfig
-  group: modules.krateoplatformops.io
+  group: modules.krateo.io
   names:
     kind: Core
     listKind: CoreList
     plural: core
     singular: core
   versions:
-    - name: v1alpha1
-      served: true
+    -
+      name: v1alpha1
       referenceable: true
       schema:
         openAPIV3Schema:
-          description: Core module of Krateo PlatformOps
-          type: object
+          description: "Core module of Krateo PlatformOps"
           properties:
             spec:
-              type: object
               properties:
-                argocdVersion:
+                auth:
+                  description: "Authentication methods"
+                  properties:
+                    github:
+                      description: "Krateo dashboard GitHub providers"
+                      properties:
+                        clientId:
+                          description: "Krateo dashboard GitHub provider clientId"
+                          type: string
+                        clientSecret:
+                          description: "Krateo dashboard GitHub provider clientSecret"
+                          type: string
+                        token:
+                          description: "Krateo dashboard GitHub provider token"
+                          type: string
+                      type: object
+                  type: object
+                backendUrl:
+                  description: "Kerberus Dashboard backend url"
                   type: string
-                  description: ArgoCD version
+                frontendUrl:
+                  description: "Kerberus Dashboard frontend url"
+                  type: string
+                grafana:
+                  description: "Grafana values"
+                  properties:
+                    target:
+                      description: "Grafana target url"
+                      type: string
+                    token:
+                      description: "Grafana token"
+                      type: string
+                  type: object
+                kubernetes:
+                  description: "Kubernetes values"
+                  properties:
+                    clusters:
+                      description: "Kubernetes clusters visible from Krateo dashboard"
+                      items:
+                        description: "Kubernetes cluster visible from Krateo dashboard"
+                        properties:
+                          authProvider:
+                            description: "Kubernetes cluster authProvider"
+                            type: string
+                          name:
+                            description: "Kubernetes cluster name"
+                            type: string
+                          skipTLSVerify:
+                            description: "Kubernetes cluster skipTLSVerify"
+                            type: boolean
+                          url:
+                            description: "Kubernetes cluster url"
+                            type: string
+                        type: object
+                      type: array
+                    customResources:
+                      description: "customResources defined for Kubernetes plugin"
+                      items:
+                        description: "customResource for Kubernetes plugin"
+                        properties:
+                          apiVersion:
+                            description: "customResource apiVersion"
+                            type: string
+                          group:
+                            description: "customResource group"
+                            type: string
+                          plural:
+                            description: "customResource plural"
+                            type: string
+                        type: object
+                      type: array
+                  type: object
+                organization:
+                  description: Organization
+                  type: string
+                prometheus:
+                  description: "Prometheus values"
+                  properties:
+                    target:
+                      description: "Prometheus target"
+                      type: string
+                  type: object
+                providers:
+                  description: "Krateo dashboard providers"
+                  properties:
+                    github:
+                      description: "Krateo dashboard GitHub providers"
+                      properties:
+                        clientId:
+                          description: "Krateo dashboard GitHub provider clientId"
+                          type: string
+                        clientSecret:
+                          description: "Krateo dashboard GitHub provider clientSecret"
+                          type: string
+                        token:
+                          description: "Krateo dashboard GitHub provider token"
+                          type: string
+                      type: object
+                  type: object
+                sonarqube:
+                  description: "SonarQube values"
+                  properties:
+                    token:
+                      description: "SonarQube token"
+                      type: string
+                  type: object
+              type: object
+          type: object
+      served: true
