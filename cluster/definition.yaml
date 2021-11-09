@@ -1,18 +1,12 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-#  name: demostacks.gcp-stack-template-plus.projectkerberus.io
   name: core.modules.krateoplatformops.io
 spec:
   connectionSecretKeys:
     - kubeconfig
-#  group: gcp-stack-template-plus.projectkerberus.io
   group: modules.krateoplatformops.io
   names:
-#    kind: DemoStack
-#    listKind: DemoStackList
-#    plural: demostacks
-#    singular: demostack
     kind: Core
     listKind: CoreList
     plural: core
@@ -32,5 +26,3 @@ spec:
                 argocdVersion:
                   type: string
                   description: ArgoCD version
-#              required:
-#                - clusterVersion
