@@ -75,7 +75,7 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: 'ghcr.io/krateo/xp-provider-argocd-token:0.1.0'
+          package: 'ghcr.io/krateoplatformops/xp-provider-argocd-token:0.1.0'
           packagePullPolicy: Always
           packagePullSecrets:
             - name: cr-token
