@@ -93,7 +93,7 @@ spec:
               string:
                 fmt: "%s-argocd-provider-controllerconfig"
     - base:
-        apiVersion: argocd.krateo.io/v1alpha1
+        apiVersion: argocd.krateoplatformops.io/v1alpha1
         kind: ProviderConfig
         metadata:
           name: argocd-provider-config
