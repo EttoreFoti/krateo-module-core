@@ -18,78 +18,111 @@ spec:
       referenceable: true
       schema:
         openAPIV3Schema:
-          description: "Core module of Krateo PlatformOps"
+          description: Core module of Krateo PlatformOps
           properties:
             spec:
               properties:
                 auth:
-                  description: "Authentication methods"
+                  description: Authentication methods
                   properties:
                     github:
-                      description: "Krateo dashboard GitHub providers"
+                      description: Krateo dashboard GitHub providers
                       properties:
                         clientId:
-                          description: "Krateo dashboard GitHub provider clientId"
+                          description: Krateo dashboard GitHub provider clientId
                           type: string
                         clientSecret:
-                          description: "Krateo dashboard GitHub provider clientSecret"
+                          description: Krateo dashboard GitHub provider clientSecret
                           type: string
                         token:
-                          description: "Krateo dashboard GitHub provider token"
+                          description: Krateo dashboard GitHub provider token
                           type: string
                       type: object
                   type: object
+                ingress:
+                  description: Ingress definition
+                  type: object
+                  properties:
+                    annotations:
+                      description: Ingress annotation
+                      type: object
+                      properties:
+                        kubernetes.io/ingress.class:
+                          description: Ingress class
+                          type: string
                 backendUrl:
-                  description: "Kerberus Dashboard backend url"
+                  description: Kerberus Dashboard backend url
                   type: string
                 frontendUrl:
-                  description: "Kerberus Dashboard frontend url"
+                  description: Kerberus Dashboard frontend url
                   type: string
+                frontend:
+                  description: Kerberus Dashboard frontend
+                  type: object
+                  properties:
+                    service:
+                      description: Kubernetes service for Kerberus Dashboard frontend
+                      type: object
+                      properties:
+                        type:
+                          description: Kubernetes service type for Kerberus Dashboard frontend
+                          type: string
+                backend:
+                  description: Kerberus Dashboard backend
+                  type: object
+                  properties:
+                    service:
+                      description: Kubernetes service for Kerberus Dashboard backend
+                      type: object
+                      properties:
+                        type:
+                          description: Kubernetes service type for Kerberus Dashboard backend
+                          type: string
                 grafana:
-                  description: "Grafana values"
+                  description: Grafana values
                   properties:
                     target:
-                      description: "Grafana target url"
+                      description: Grafana target url
                       type: string
                     token:
-                      description: "Grafana token"
+                      description: Grafana token
                       type: string
                   type: object
                 kubernetes:
-                  description: "Kubernetes values"
+                  description: Kubernetes values
                   properties:
                     clusters:
-                      description: "Kubernetes clusters visible from Krateo dashboard"
+                      description: Kubernetes clusters visible from Krateo dashboard
                       items:
-                        description: "Kubernetes cluster visible from Krateo dashboard"
+                        description: Kubernetes cluster visible from Krateo dashboard
                         properties:
                           authProvider:
-                            description: "Kubernetes cluster authProvider"
+                            description: Kubernetes cluster authProvider
                             type: string
                           name:
-                            description: "Kubernetes cluster name"
+                            description: Kubernetes cluster name
                             type: string
                           skipTLSVerify:
-                            description: "Kubernetes cluster skipTLSVerify"
+                            description: Kubernetes cluster skipTLSVerify
                             type: boolean
                           url:
-                            description: "Kubernetes cluster url"
+                            description: Kubernetes cluster url
                             type: string
                         type: object
                       type: array
                     customResources:
-                      description: "customResources defined for Kubernetes plugin"
+                      description: customResources defined for Kubernetes plugin
                       items:
-                        description: "customResource for Kubernetes plugin"
+                        description: customResource for Kubernetes plugin
                         properties:
                           apiVersion:
-                            description: "customResource apiVersion"
+                            description: customResource apiVersion
                             type: string
                           group:
-                            description: "customResource group"
+                            description: customResource group
                             type: string
                           plural:
-                            description: "customResource plural"
+                            description: customResource plural
                             type: string
                         type: object
                       type: array
@@ -98,34 +131,34 @@ spec:
                   description: Organization
                   type: string
                 prometheus:
-                  description: "Prometheus values"
+                  description: Prometheus values
                   properties:
                     target:
-                      description: "Prometheus target"
+                      description: Prometheus target
                       type: string
                   type: object
                 providers:
-                  description: "Krateo dashboard providers"
+                  description: Krateo dashboard providers
                   properties:
                     github:
-                      description: "Krateo dashboard GitHub providers"
+                      description: Krateo dashboard GitHub providers
                       properties:
                         clientId:
-                          description: "Krateo dashboard GitHub provider clientId"
+                          description: Krateo dashboard GitHub provider clientId
                           type: string
                         clientSecret:
-                          description: "Krateo dashboard GitHub provider clientSecret"
+                          description: Krateo dashboard GitHub provider clientSecret
                           type: string
                         token:
-                          description: "Krateo dashboard GitHub provider token"
+                          description: Krateo dashboard GitHub provider token
                           type: string
                       type: object
                   type: object
                 sonarqube:
-                  description: "SonarQube values"
+                  description: SonarQube values
                   properties:
                     token:
-                      description: "SonarQube token"
+                      description: SonarQube token
                       type: string
                   type: object
               type: object

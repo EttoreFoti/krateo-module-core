@@ -180,6 +180,10 @@ spec:
           toFieldPath: "spec.forProvider.values.organization"
         - fromFieldPath: "spec.frontendUrl"
           toFieldPath: "spec.forProvider.values.frontendUrl"
+        - fromFieldPath: "spec.frontend.service.type"
+          toFieldPath: "spec.forProvider.values.frontend.service.type"
+        - fromFieldPath: "spec.backend.service.type"
+          toFieldPath: "spec.forProvider.values.backend.service.type"
         - fromFieldPath: "spec.backendUrl"
           toFieldPath: "spec.forProvider.values.backendUrl"
         - fromFieldPath: "spec.sonarqube.token"
@@ -206,6 +210,8 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.github.clientId"
         - fromFieldPath: "spec.auth.github.clientSecret"
           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
+        - fromFieldPath: "spec.ingress.annotations.kubernetes.io/ingress.class"
+          toFieldPath: "spec.forProvider.values.ingress.annotations.kubernetes.io/ingress.class"
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
