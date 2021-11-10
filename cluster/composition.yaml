@@ -53,7 +53,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-release"
+                fmt: "%s-argocd"
         - fromFieldPath: metadata.name
           toFieldPath: metadata.annotations[crossplane.io/external-name]
     - base:
@@ -175,7 +175,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-krateodashboard-release"
+                fmt: "%s-krateodashboard"
         - fromFieldPath: "spec.organization"
           toFieldPath: "spec.forProvider.values.organization"
         - fromFieldPath: "spec.frontendUrl"
@@ -228,4 +228,4 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-krateodashboard-db-release"
+                fmt: "%s-krateodashboard-db"
