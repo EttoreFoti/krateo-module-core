@@ -206,3 +206,26 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.github.clientId"
         - fromFieldPath: "spec.auth.github.clientSecret"
           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
+    - base:
+        apiVersion: helm.crossplane.io/v1beta1
+        kind: Release
+        spec:
+          forProvider:
+            chart:
+              name: postgresql
+              repository: https://charts.bitnami.com/bitnami
+              version: 10.9.2
+            namespace: krateo-system
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-helm-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-krateodashboard-db-release"
