@@ -43,6 +43,9 @@ spec:
                   description: Ingress definition
                   type: object
                   properties:
+                    enabled:
+                      description: Ingress enabled
+                      type: boolean
                     annotations:
                       description: Ingress annotation
                       type: object

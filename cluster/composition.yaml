@@ -212,6 +212,8 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
         - fromFieldPath: "spec.ingress.annotations.kubernetes.io/ingress.class"
           toFieldPath: "spec.forProvider.values.ingress.annotations.kubernetes.io/ingress.class"
+        - fromFieldPath: "spec.ingress.enabled"
+          toFieldPath: "spec.forProvider.values.ingress.enabled"
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
