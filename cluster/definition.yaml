@@ -24,9 +24,11 @@ spec:
               properties:
                 auth:
                   description: Authentication methods
+                  type: object
                   properties:
                     github:
                       description: Krateo dashboard GitHub providers
+                      type: object
                       properties:
                         clientId:
                           description: Krateo dashboard GitHub provider clientId
@@ -37,8 +39,6 @@ spec:
                         token:
                           description: Krateo dashboard GitHub provider token
                           type: string
-                      type: object
-                  type: object
                 ingress:
                   description: Ingress definition
                   type: object
@@ -83,6 +83,7 @@ spec:
                           type: string
                 grafana:
                   description: Grafana values
+                  type: object
                   properties:
                     target:
                       description: Grafana target url
@@ -90,14 +91,16 @@ spec:
                     token:
                       description: Grafana token
                       type: string
-                  type: object
                 kubernetes:
                   description: Kubernetes values
+                  type: object
                   properties:
                     clusters:
                       description: Kubernetes clusters visible from Krateo dashboard
+                      type: array
                       items:
                         description: Kubernetes cluster visible from Krateo dashboard
+                        type: object
                         properties:
                           authProvider:
                             description: Kubernetes cluster authProvider
@@ -111,12 +114,12 @@ spec:
                           url:
                             description: Kubernetes cluster url
                             type: string
-                        type: object
-                      type: array
                     customResources:
                       description: customResources defined for Kubernetes plugin
+                      type: array
                       items:
                         description: customResource for Kubernetes plugin
+                        type: object
                         properties:
                           apiVersion:
                             description: customResource apiVersion
@@ -127,24 +130,23 @@ spec:
                           plural:
                             description: customResource plural
                             type: string
-                        type: object
-                      type: array
-                  type: object
                 organization:
                   description: Organization
                   type: string
                 prometheus:
                   description: Prometheus values
+                  type: object
                   properties:
                     target:
                       description: Prometheus target
                       type: string
-                  type: object
                 providers:
                   description: Krateo dashboard providers
+                  type: object
                   properties:
                     github:
                       description: Krateo dashboard GitHub providers
+                      type: object
                       properties:
                         clientId:
                           description: Krateo dashboard GitHub provider clientId
@@ -155,15 +157,34 @@ spec:
                         token:
                           description: Krateo dashboard GitHub provider token
                           type: string
-                      type: object
-                  type: object
                 sonarqube:
                   description: SonarQube values
+                  type: object
                   properties:
                     token:
                       description: SonarQube token
                       type: string
+                argo-cd:
+                  description: Argo-cd helm chart values
                   type: object
+                  properties:
+                    version:
+                      description: argo-cd helm chart version
+                      type: string
+                krateo-dashboard:
+                  description: krateo-dashboard helm chart values
+                  type: object
+                  properties:
+                    version:
+                      description: krateo-dashboard helm chart version
+                      type: string
+                postgresql:
+                  description: postgresql helm chart values
+                  type: object
+                  properties:
+                    version:
+                      description: postgresql helm chart version
+                      type: string
               type: object
           type: object
       served: true

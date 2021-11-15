@@ -42,6 +42,8 @@ spec:
                 config:
                   accounts.krateo-dashboard: apiKey, login
       patches:
+        - fromFieldPath: "spec.argo-cd.version"
+          toFieldPath: "spec.forProvider.chart.version"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
@@ -164,6 +166,8 @@ spec:
               version: 0.3.99
             namespace: krateo-system
       patches:
+        - fromFieldPath: "spec.krateo-dashboard.version"
+          toFieldPath: "spec.forProvider.chart.version"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
@@ -237,3 +241,5 @@ spec:
             - type: string
               string:
                 fmt: "%s-krateodashboard-db"
+        - fromFieldPath: "spec.postgresql.version"
+          toFieldPath: "spec.forProvider.chart.version"
