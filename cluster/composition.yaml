@@ -216,6 +216,10 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
         - fromFieldPath: "spec.ingress.annotations[kubernetes.io/ingress.class]"
           toFieldPath: "spec.forProvider.values.ingress.annotations[kubernetes.io/ingress.class]"
+        - fromFieldPath: "spec.ingress.annotations[kubernetes.io/tls-acme]"
+          toFieldPath: "spec.forProvider.values.ingress.annotations[kubernetes.io/tls-acme]"
+        - fromFieldPath: "spec.ingress.annotations[ingress.kubernetes.io/force-ssl-redirect]"
+          toFieldPath: "spec.forProvider.values.ingress.annotations[ingress.kubernetes.io/force-ssl-redirect]"
         - fromFieldPath: "spec.ingress.enabled"
           toFieldPath: "spec.forProvider.values.ingress.enabled"
     - base:
