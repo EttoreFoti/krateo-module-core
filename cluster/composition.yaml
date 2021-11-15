@@ -214,8 +214,8 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.github.clientId"
         - fromFieldPath: "spec.auth.github.clientSecret"
           toFieldPath: "spec.forProvider.values.auth.github.clientSecret"
-        - fromFieldPath: "spec.ingress.annotations.kubernetes.io/ingress.class"
-          toFieldPath: "spec.forProvider.values.ingress.annotations.kubernetes.io/ingress.class"
+        - fromFieldPath: "spec.ingress.annotations"
+          toFieldPath: "spec.forProvider.values.ingress.annotations"
         - fromFieldPath: "spec.ingress.enabled"
           toFieldPath: "spec.forProvider.values.ingress.enabled"
     - base:
