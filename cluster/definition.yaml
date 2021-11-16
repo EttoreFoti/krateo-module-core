@@ -59,6 +59,13 @@ spec:
                         ingress.kubernetes.io/force-ssl-redirect:
                           description: Ingress tls
                           type: string
+                lighthouse:
+                  description: tool for improving the performance, quality, and correctness of your web apps
+                  type: object
+                  properties:
+                    enabled:
+                      description: lighthouse enabled boolean condition
+                      type: boolean
                 backendUrl:
                   description: Kerberus Dashboard backend url
                   type: string
