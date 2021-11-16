@@ -13,5 +13,5 @@ SA=$(kubectl -n crossplane-system get sa -o name | grep provider-helm | sed -e '
 
 kubectl create clusterrolebinding provider-helm-admin-binding --clusterrole cluster-admin --serviceaccount="${SA}"
 
-kubectl apply -f krateo-module-core.yaml
+kubectl apply -f examples/krateo-module-core.yaml
 ```
