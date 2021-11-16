@@ -46,6 +46,13 @@ spec:
                     enabled:
                       description: Ingress enabled
                       type: boolean
+                    tls:
+                      description: Ingress tls configuration
+                      type: object
+                      properties:
+                        enabled:
+                          description: Ingress tls enabled
+                          type: boolean
                     annotations:
                       description: Ingress annotation
                       type: object

@@ -222,8 +222,10 @@ spec:
           toFieldPath: "spec.forProvider.values.ingress.annotations[ingress.kubernetes.io/force-ssl-redirect]"
         - fromFieldPath: "spec.ingress.enabled"
           toFieldPath: "spec.forProvider.values.ingress.enabled"
+        - fromFieldPath: "spec.ingress.tls.enabled"
+          toFieldPath: "spec.forProvider.values.ingress.tls.enabled"
         - fromFieldPath: "spec.lighthouse.enabled"
-          toFieldPath: "spec.forProvider.values.lighthouse.enabled"  
+          toFieldPath: "spec.forProvider.values.lighthouse.enabled"
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
