@@ -13,8 +13,7 @@ spec:
     plural: core
     singular: core
   versions:
-    -
-      name: v1alpha1
+    - name: v1alpha1
       referenceable: true
       schema:
         openAPIV3Schema:
@@ -46,6 +45,7 @@ spec:
                     enabled:
                       description: Ingress enabled
                       type: boolean
+                      default: false
                     tls:
                       description: Ingress tls configuration
                       type: object
@@ -53,6 +53,7 @@ spec:
                         enabled:
                           description: Ingress tls enabled
                           type: boolean
+                      default: false
                     annotations:
                       description: Ingress annotation
                       type: object
@@ -73,6 +74,7 @@ spec:
                     enabled:
                       description: lighthouse enabled boolean condition
                       type: boolean
+                  default: false
                 backendUrl:
                   description: Kerberus Dashboard backend url
                   type: string
