@@ -154,7 +154,12 @@ spec:
                             type: string
                 organization:
                   description: Organization
-                  type: string
+                  # type: string
+                  type: object
+                  properties:
+                    version:
+                      description: Organization
+                      type: string
                 prometheus:
                   description: Prometheus values
                   type: object
@@ -201,6 +206,7 @@ spec:
                     version:
                       description: krateo-dashboard helm chart version
                       type: string
+                  default: 0.3.106
                 postgresql:
                   description: postgresql helm chart values
                   type: object
@@ -208,6 +214,7 @@ spec:
                     version:
                       description: postgresql helm chart version
                       type: string
+                  default: 10.9.2
               type: object
           type: object
       served: true
