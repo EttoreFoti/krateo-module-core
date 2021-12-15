@@ -154,12 +154,7 @@ spec:
                             type: string
                 organization:
                   description: Organization
-                  # type: string
-                  type: object
-                  properties:
-                    version:
-                      description: Organization
-                      type: string
+                  type: string
                 prometheus:
                   description: Prometheus values
                   type: object
