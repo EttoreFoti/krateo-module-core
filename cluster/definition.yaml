@@ -53,7 +53,7 @@ spec:
                         enabled:
                           description: Ingress tls enabled
                           type: boolean
-                      default: false
+                          default: false
                     annotations:
                       description: Ingress annotation
                       type: object
@@ -74,7 +74,7 @@ spec:
                     enabled:
                       description: lighthouse enabled boolean condition
                       type: boolean
-                  default: false
+                      default: false
                 backendUrl:
                   description: Kerberus Dashboard backend url
                   type: string
@@ -193,7 +193,7 @@ spec:
                     version:
                       description: argo-cd helm chart version
                       type: string
-                  default: 3.26.5
+                      default: 3.26.5
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
@@ -201,7 +201,7 @@ spec:
                     version:
                       description: krateo-dashboard helm chart version
                       type: string
-                  default: 0.3.106
+                      default: 0.3.106
                 postgresql:
                   description: postgresql helm chart values
                   type: object
@@ -209,7 +209,7 @@ spec:
                     version:
                       description: postgresql helm chart version
                       type: string
-                  default: 10.9.2
+                      default: 10.9.2
               type: object
           type: object
       served: true
