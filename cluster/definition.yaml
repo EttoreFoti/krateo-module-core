@@ -212,4 +212,7 @@ spec:
                       default: 10.9.2
               type: object
           type: object
+          required:
+            - frontendUrl
+            - backendUrl
       served: true

@@ -3,7 +3,7 @@ kind: Core
 metadata:
   name: krateo-module-core
 spec:
-  organization: Kiratech Company
+  organization: Krateo PlatformOps Company
   frontendUrl: https://krateo-dashboard.krateo.io
   frontend:
     service:
@@ -13,6 +13,7 @@ spec:
     service:
       type: ClusterIP
   ingress:
+    enabled: false
   lighthouse:
     enabled: false
   providers:
