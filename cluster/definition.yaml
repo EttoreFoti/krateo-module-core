@@ -202,14 +202,6 @@ spec:
                       description: krateo-dashboard helm chart version
                       type: string
                       default: 0.3.106
-                postgresql:
-                  description: postgresql helm chart values
-                  type: object
-                  properties:
-                    version:
-                      description: postgresql helm chart version
-                      type: string
-                      default: 10.9.2
               type: object
           type: object
           required:
