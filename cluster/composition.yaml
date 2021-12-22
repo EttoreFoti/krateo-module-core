@@ -1,15 +1,15 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-#  name: demostacks.gcp-stack-template-plus.projectkerberus.io
+  #  name: demostacks.gcp-stack-template-plus.projectkerberus.io
   name: core.modules.krateo.io
 spec:
-#  writeConnectionSecretsToNamespace: crossplane-system
+  #  writeConnectionSecretsToNamespace: crossplane-system
   writeConnectionSecretsToNamespace: krateo-system
   compositeTypeRef:
-#    apiVersion: gcp-stack-template-plus.projectkerberus.io/v1alpha1
+    #    apiVersion: gcp-stack-template-plus.projectkerberus.io/v1alpha1
     apiVersion: modules.krateo.io/v1alpha1
-#    kind: DemoStack
+    #    kind: DemoStack
     kind: Core
   resources:
     - base:
@@ -116,7 +116,7 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: 'ghcr.io/krateoplatformops/krateoruntime-provider-argocd:0.1.0'
+          package: "ghcr.io/krateoplatformops/krateoruntime-provider-argocd:0.1.0"
           packagePullPolicy: Always
           # packagePullSecrets:
           #   - name: cr-token
@@ -139,7 +139,7 @@ spec:
         metadata:
           name: argocd-provider-config
         spec:
-#          serverAddr: argocd-server.argocd.svc:443
+          #          serverAddr: argocd-server.argocd.svc:443
           insecure: true
           credentials:
             source: Secret
@@ -202,7 +202,7 @@ spec:
             chart:
               name: krateo-dashboard
               repository: https://krateoplatformops.github.io/krateo-dashboard
-              version: 0.3.99
+              version: 0.3.113
             namespace: krateo-system
       patches:
         - fromFieldPath: "spec.krateo-dashboard.version"
