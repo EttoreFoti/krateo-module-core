@@ -24,5 +24,3 @@ spec:
     version: 3.26.5
   krateo-dashboard:
     version: 0.3.113
-  # postgresql:
-  #   version: 10.9.2
