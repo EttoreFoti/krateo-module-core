@@ -193,7 +193,7 @@ spec:
                     version:
                       description: argo-cd helm chart version
                       type: string
-                      default: 3.26.5
+                      default: 3.29.4
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
@@ -201,7 +201,7 @@ spec:
                     version:
                       description: krateo-dashboard helm chart version
                       type: string
-                      default: 0.3.106
+                      default: 0.3.113
               type: object
           type: object
           required:
