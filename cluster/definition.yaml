@@ -92,6 +92,7 @@ spec:
                         type:
                           description: Kubernetes service type for Kerberus Dashboard frontend
                           type: string
+                          default: ClusterIP
                 backend:
                   description: Kerberus Dashboard backend
                   type: object
@@ -103,6 +104,7 @@ spec:
                         type:
                           description: Kubernetes service type for Kerberus Dashboard backend
                           type: string
+                          default: ClusterIP
                 grafana:
                   description: Grafana values
                   type: object
