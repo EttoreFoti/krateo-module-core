@@ -24,7 +24,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-helm-providerconfig-incluster"
+                fmt: "%s-provider-helm-providerconfig-incluster"
       readinessChecks:
         - type: None
     - base:
@@ -90,13 +90,13 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-helm-providerconfig-incluster"
+                fmt: "%s-provider-helm-providerconfig-incluster"
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd"
+                fmt: "%s-release-argocd"
         - fromFieldPath: metadata.name
           toFieldPath: metadata.annotations[crossplane.io/external-name]
     - base:
@@ -105,13 +105,24 @@ spec:
         spec:
           args:
             - --debug
+          securityContext: {}
+          podSecurityContext: {}
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-provider-controllerconfig"
+                fmt: "%s-provider-argocd-controllerconfig"
+        - fromFieldPath: "spec.argo-cd.global.securityContext"
+          toFieldPath: "spec.securityContext"
     - base:
         apiVersion: pkg.crossplane.io/v1
         kind: Provider
@@ -128,18 +139,18 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-provider"
+                fmt: "%s-provider-argocd"
         - fromFieldPath: metadata.name
           toFieldPath: spec.controllerConfigRef.name
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-provider-controllerconfig"
+                fmt: "%s-provider-argocd-controllerconfig"
     - base:
         apiVersion: argocd.krateoplatformops.io/v1alpha1
         kind: ProviderConfig
         metadata:
-          name: argocd-provider-config
+          name: provider-argocd-providerconfig
         spec:
           #          serverAddr: argocd-server.argocd.svc:443
           insecure: true
@@ -155,7 +166,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-providerconfig"
+                fmt: "%s-provider-argocd-providerconfig"
         - fromFieldPath: metadata.name
           toFieldPath: spec.serverAddr
           transforms:
@@ -195,7 +206,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-providerconfig"
+                fmt: "%s-provider-argocd-providerconfig"
     - base:
         apiVersion: helm.crossplane.io/v1beta1
         kind: Release
@@ -214,7 +225,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-helm-providerconfig-incluster"
+                fmt: "%s-provider-helm-providerconfig-incluster"
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
           transforms:
