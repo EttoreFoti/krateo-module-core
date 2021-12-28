@@ -206,13 +206,13 @@ spec:
                           properties:
                             runAsUser:
                               description: Argo-cd helm chart global securityContext runAsUser value
-                              type: string
+                              type: integer
                             runAsGroup:
                               description: Argo-cd helm chart global securityContext runAsGroup value
-                              type: string
+                              type: integer
                             fsGroup:
                               description: Argo-cd helm chart global securityContext fsGroup value
-                              type: string
+                              type: integer
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
