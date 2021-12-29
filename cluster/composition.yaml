@@ -83,12 +83,8 @@ spec:
       patches:
         - fromFieldPath: "spec.argo-cd.version"
           toFieldPath: "spec.forProvider.chart.version"
-        - fromFieldPath: "spec.argo-cd.global.securityContext.runAsUser"
-          toFieldPath: "spec.forProvider.values.global.securityContext.runAsUser"
-          transforms:
-            - type: convert
-              convert:
-                toType: int
+        - fromFieldPath: "spec.argo-cd.global.securityContext"
+          toFieldPath: "spec.forProvider.values.global.securityContext"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
@@ -125,12 +121,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-provider-argocd-controllerconfig"
-        - fromFieldPath: "spec.argo-cd.global.securityContext.runAsUser"
-          toFieldPath: "spec.forProvider.values.global.securityContext.runAsUser"
-          transforms:
-            - type: convert
-              convert:
-                toType: int
+        - fromFieldPath: "spec.argo-cd.global.securityContext"
+          toFieldPath: "spec.forProvider.values.global.securityContext"
     - base:
         apiVersion: pkg.crossplane.io/v1
         kind: Provider
