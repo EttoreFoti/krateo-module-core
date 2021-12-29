@@ -125,8 +125,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-provider-argocd-controllerconfig"
-        - fromFieldPath: "spec.argo-cd.global.securityContext"
-          toFieldPath: "spec.securityContext"
+        - fromFieldPath: "spec.argo-cd.global.securityContext.runAsUser"
+          toFieldPath: "spec.forProvider.values.global.securityContext.runAsUser"
+          transforms:
+            - type: convert
+              convert:
+                toType: int
     - base:
         apiVersion: pkg.crossplane.io/v1
         kind: Provider
