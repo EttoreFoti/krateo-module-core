@@ -206,13 +206,13 @@ spec:
                           properties:
                             runAsUser:
                               description: Argo-cd helm chart global securityContext runAsUser value
-                              type: string
+                              type: integer
                             runAsGroup:
                               description: Argo-cd helm chart global securityContext runAsGroup value
-                              type: string
+                              type: integer
                             fsGroup:
                               description: Argo-cd helm chart global securityContext fsGroup value
-                              type: string
+                              type: integer
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
@@ -221,6 +221,24 @@ spec:
                       description: krateo-dashboard helm chart version
                       type: string
                       default: 0.3.113
+                    postgresql:
+                      description: postgresql for krateo-dashboard-backend helm chart values
+                      type: object
+                      properties:
+                        securityContext:
+                          description: postgresql for krateo-dashboard-backend helm chart securityContext values
+                          type: object
+                          properties:
+                            enabled:
+                              description: postgresql for krateo-dashboard-backend helm chart securityContext enabled values
+                              type: boolean
+                        containerSecurityContext:
+                          description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext values
+                          type: object
+                          properties:
+                            enabled:
+                              description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext enabled values
+                              type: boolean
               type: object
           type: object
           required:

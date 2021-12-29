@@ -278,3 +278,7 @@ spec:
           toFieldPath: "spec.forProvider.values.ingress.tls.enabled"
         - fromFieldPath: "spec.lighthouse.enabled"
           toFieldPath: "spec.forProvider.values.lighthouse.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.securityContext.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.securityContext.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
