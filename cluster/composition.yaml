@@ -83,8 +83,8 @@ spec:
       patches:
         - fromFieldPath: "spec.argo-cd.version"
           toFieldPath: "spec.forProvider.chart.version"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext"
-          toFieldPath: "spec.forProvider.values.redis.securityContext"
+        - fromFieldPath: "spec.argo-cd.global.securityContext"
+          toFieldPath: "spec.forProvider.values.global.securityContext"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
