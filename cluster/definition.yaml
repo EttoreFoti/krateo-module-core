@@ -196,17 +196,17 @@ spec:
                       description: argo-cd helm chart version
                       type: string
                       default: 3.29.4
-                    global:
+                    redis:
                       description: Argo-cd helm chart redis values
                       type: object
                       properties:
                         securityContext:
                           description: Argo-cd helm chart redis securityContext values
                           type: object
-                          properties:
-                            runAsUser:
-                              description: Argo-cd helm chart redis securityContext runAsUser value
-                              type: integer
+                          # properties:
+                          #   runAsUser:
+                          #     description: Argo-cd helm chart redis securityContext runAsUser value
+                          #     type: integer
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
