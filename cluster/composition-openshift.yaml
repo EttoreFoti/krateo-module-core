@@ -248,7 +248,7 @@ spec:
     #       #   login - allows to login using UI
     #       accounts.krateo-dashboard: apiKey, login
     - base:
-        apiVersion: tokens.argocd.krateo.io/v1alpha1
+        apiVersion: argocd.krateoplatformops.io/v1alpha1
         kind: Token
         metadata:
           name: krateo-dashboard-argocd-token
