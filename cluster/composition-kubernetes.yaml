@@ -43,8 +43,7 @@ spec:
               server:
                 config:
                   accounts.krateo-dashboard: apiKey, login
-                  extraArgs:
-                    - "--insecure"
+                  extraArgs: "--insecure"
                 resources:
                   limits:
                     cpu: 100m
