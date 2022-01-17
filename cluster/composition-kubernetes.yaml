@@ -41,8 +41,8 @@ spec:
             namespace: krateo-system
             values:
               server:
-                # extraArgs:
-                #   - --insecure
+                extraArgs:
+                  - --insecure
                 config:
                   accounts.krateo-dashboard: apiKey, login
                 resources:
@@ -174,7 +174,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-server.krateo-system.svc:443"
+                fmt: "%s-argocd-server.krateo-system.svc"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap
