@@ -41,8 +41,8 @@ spec:
             namespace: krateo-system
             values:
               server:
-                extraArgs:
-                  - --insecure
+                # extraArgs:
+                #   - --insecure
                 config:
                   accounts.krateo-dashboard: apiKey, login
                   accounts.krateo-dashboard.enabled: "true"
