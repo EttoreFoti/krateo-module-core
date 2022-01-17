@@ -45,6 +45,7 @@ spec:
                   - --insecure
                 config:
                   accounts.krateo-dashboard: apiKey, login
+                  accounts.krateo-dashboard.enabled: "true"
                 resources:
                   limits:
                     cpu: 100m
@@ -174,7 +175,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-server.krateo-system.svc:80"
+                fmt: "%s-argocd-server.krateo-system.svc:443"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap
