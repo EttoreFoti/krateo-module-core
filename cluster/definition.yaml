@@ -164,6 +164,22 @@ spec:
                     target:
                       description: Prometheus target
                       type: string
+                keptn:
+                  description: Keptn values
+                  type: object
+                  properties:
+                    bridge:
+                      description: Keptn bridge url
+                      type: string
+                    bridgeToken:
+                      description: Keptn bridge token
+                      type: string
+                    api:
+                      description: Keptn api url
+                      type: string
+                    apiToken:
+                      description: Keptn api token
+                      type: string
                 providers:
                   description: Krateo dashboard providers
                   type: object
