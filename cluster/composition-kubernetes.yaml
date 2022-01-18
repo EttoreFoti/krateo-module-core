@@ -43,6 +43,9 @@ spec:
               server:
                 # extraArgs:
                 #   - --insecure
+                rbacConfig:
+                  policy:
+                    default: "role:admin"
                 config:
                   accounts.krateo-dashboard: apiKey, login
                   accounts.krateo-dashboard.enabled: "true"
