@@ -25,3 +25,8 @@ spec:
     version: 3.26.5
   krateo-dashboard:
     version: 0.3.113
+    keptn:
+      bridge: http://keptn.krateoplatformops.io/bridge/api/
+      api: http://keptn.krateoplatformops.io/api/v1/
+      bridgeToken: Basic <token>
+      apiToken: <token>
