@@ -14,21 +14,6 @@ spec:
     #    kind: DemoStack
     kind: Core
   resources:
-    # - base:
-    #     apiVersion: helm.crossplane.io/v1beta1
-    #     kind: ProviderConfig
-    #     spec:
-    #       credentials:
-    #         source: InjectedIdentity
-    #   patches:
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: metadata.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-provider-helm-providerconfig-incluster"
-    #   readinessChecks:
-    #     - type: None
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: ProviderConfig
@@ -44,78 +29,33 @@ spec:
                 fmt: "%s-provider-k8s-providerconfig-incluster"
       readinessChecks:
         - type: None
-    # - base:
-    #     apiVersion: helm.crossplane.io/v1beta1
-    #     kind: Release
-    #     spec:
-    #       forProvider:
-    #         chart:
-    #           name: argo-cd
-    #           repository: https://argoproj.github.io/argo-helm
-    #           version: 3.26.5
-    #         namespace: krateo-system
-    #         values:
-    #           server:
-    #             config:
-    #               accounts.krateo-dashboard: apiKey, login
-    #             resources:
-    #               limits:
-    #                 cpu: 100m
-    #                 memory: 128Mi
-    #               requests:
-    #                 cpu: 50m
-    #                 memory: 64Mi
-    #           controller:
-    #             resources:
-    #               limits:
-    #                 cpu: 500m
-    #                 memory: 512Mi
-    #               requests:
-    #                 cpu: 250m
-    #                 memory: 256Mi
-    #           dex:
-    #             resources:
-    #               limits:
-    #                 cpu: 50m
-    #                 memory: 64Mi
-    #               requests:
-    #                 cpu: 10m
-    #                 memory: 32Mi
-    #           redis:
-    #             resources:
-    #               limits:
-    #                 cpu: 200m
-    #                 memory: 128Mi
-    #               requests:
-    #                 cpu: 100m
-    #                 memory: 64Mi
-    #           repoServer:
-    #             resources:
-    #               limits:
-    #                 cpu: 50m
-    #                 memory: 128Mi
-    #               requests:
-    #                 cpu: 10m
-    #                 memory: 64Mi
-    #   patches:
-    #     - fromFieldPath: "spec.argo-cd.version"
-    #       toFieldPath: "spec.forProvider.chart.version"
-    #     - fromFieldPath: "spec.argo-cd.redis.securityContext"
-    #       toFieldPath: "spec.forProvider.values.redis.securityContext"
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: spec.providerConfigRef.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-provider-helm-providerconfig-incluster"
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: metadata.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-release-argocd"
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: metadata.annotations[crossplane.io/external-name]
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: operators.coreos.com/v1
+              kind: OperatorGroup
+              metadata:
+                name: openshift-gitops-operator
+                namespace: openshift-operators
+              spec:
+                targetNamespaces:
+                - krateo-system
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-k8s-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-krateo-argocd-operator-operatorgroup"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -125,13 +65,13 @@ spec:
               apiVersion: operators.coreos.com/v1alpha1
               kind: Subscription
               metadata:
-                name: krateo-argocd-operator
-                namespace: operators
+                name: krateo-openshift-gitops-operator
+                namespace: openshift-operators
               spec:
-                channel: alpha
-                name: argocd-operator
-                source: operatorhubio-catalog
-                sourceNamespace: olm
+                channel: stable
+                name: openshift-gitops-operator
+                source: redhat-operators
+                sourceNamespace: openshift-marketplace    
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
@@ -145,22 +85,6 @@ spec:
             - type: string
               string:
                 fmt: "%s-krateo-argocd-operator-subscription"
-    - base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        spec:
-          forProvider:
-            manifest:
-              apiVersion: operators.coreos.com/v1alpha1
-              kind: Subscription
-              metadata:
-                name: my-argocd-operator
-                namespace: operators
-              spec:
-                channel: alpha
-                name: argocd-operator
-                source: operatorhubio-catalog
-                sourceNamespace: olm
     - base:
         apiVersion: pkg.crossplane.io/v1alpha1
         kind: ControllerConfig

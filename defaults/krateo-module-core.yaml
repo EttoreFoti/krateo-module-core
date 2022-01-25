@@ -29,4 +29,4 @@ spec:
       bridge: http://keptn.krateoplatformops.io/bridge/api/
       api: http://keptn.krateoplatformops.io/api/v1/
       bridgeToken: Basic <token>
-      apiToken: <token>
+      apiToken: dr7cIOBrXMHcs5Axhl4pjD1tIFSK5pfuOPstIMy0HaxbR
