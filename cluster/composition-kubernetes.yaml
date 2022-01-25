@@ -134,7 +134,7 @@ spec:
         metadata:
           name: provider-argocd
         spec:
-          package: "ghcr.io/krateoplatformops/krateoruntime-provider-argocd:0.1.0"
+          package: "ghcr.io/krateoplatformops/crossplane-provider-argocd-token:0.1.14"
           packagePullPolicy: Always
           # packagePullSecrets:
           #   - name: cr-token
@@ -173,11 +173,11 @@ spec:
               string:
                 fmt: "%s-provider-argocd-providerconfig"
         - fromFieldPath: metadata.name
-          toFieldPath: spec.serverAddr
+          toFieldPath: spec.serverUrl
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-server.krateo-system.svc:443"
+                fmt: "https://%s-argocd-server.krateo-system.svc:443"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap

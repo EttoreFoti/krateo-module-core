@@ -24,7 +24,7 @@ spec:
   argo-cd:
     version: 3.26.5
   krateo-dashboard:
-    version: 0.3.113
+    version: 0.3.132
     keptn:
       bridge: http://keptn.krateoplatformops.io/bridge/api/
       api: http://keptn.krateoplatformops.io/api/v1/
