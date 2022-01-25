@@ -35,14 +35,69 @@ spec:
         spec:
           forProvider:
             manifest:
-              apiVersion: operators.coreos.com/v1
-              kind: OperatorGroup
+              kind: ArgoCD
+              apiVersion: argoproj.io/v1alpha1
               metadata:
-                name: openshift-gitops-operator
-                namespace: openshift-operators
+                name: argocd
+                namespace: krateo-system
               spec:
-                targetNamespaces:
-                - krateo-system
+                controller:
+                  resources:
+                    limits:
+                      cpu: 2000m
+                      memory: 2048Mi
+                    requests:
+                      cpu: 250m
+                      memory: 1024Mi
+                dex:
+                  openShiftOAuth: true
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                ha:
+                  enabled: false
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                rbac:
+                  defaultPolicy: ''
+                  policy: |
+                    g, system:cluster-admins, role:admin
+                  scopes: '[groups]'
+                redis:
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                repo:
+                  resources:
+                    limits:
+                      cpu: 1000m
+                      memory: 1024Mi
+                    requests:
+                      cpu: 250m
+                      memory: 256Mi
+                server:
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 125m
+                      memory: 128Mi
+                  route:
+                    enabled: true
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
@@ -55,36 +110,63 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-krateo-argocd-operator-operatorgroup"
-    - base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        spec:
-          forProvider:
-            manifest:
-              apiVersion: operators.coreos.com/v1alpha1
-              kind: Subscription
-              metadata:
-                name: krateo-openshift-gitops-operator
-                namespace: openshift-operators
-              spec:
-                channel: stable
-                name: openshift-gitops-operator
-                source: redhat-operators
-                sourceNamespace: openshift-marketplace    
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-provider-k8s-providerconfig-incluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-krateo-argocd-operator-subscription"
+                fmt: "%s-operator-argocd"
+    # - base:
+    #     apiVersion: kubernetes.crossplane.io/v1alpha1
+    #     kind: Object
+    #     spec:
+    #       forProvider:
+    #         manifest:
+    #           apiVersion: operators.coreos.com/v1
+    #           kind: OperatorGroup
+    #           metadata:
+    #             name: openshift-gitops-operator
+    #             namespace: openshift-operators
+    #           spec:
+    #             targetNamespaces:
+    #             - krateo-system
+    #   patches:
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-k8s-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-krateo-argocd-operator-operatorgroup"
+    # - base:
+    #     apiVersion: kubernetes.crossplane.io/v1alpha1
+    #     kind: Object
+    #     spec:
+    #       forProvider:
+    #         manifest:
+    #           apiVersion: operators.coreos.com/v1alpha1
+    #           kind: Subscription
+    #           metadata:
+    #             name: krateo-openshift-gitops-operator
+    #             namespace: openshift-operators
+    #           spec:
+    #             channel: stable
+    #             name: openshift-gitops-operator
+    #             source: redhat-operators
+    #             sourceNamespace: openshift-marketplace
+    #   patches:
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-k8s-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-krateo-argocd-operator-subscription"
     - base:
         apiVersion: pkg.crossplane.io/v1alpha1
         kind: ControllerConfig
