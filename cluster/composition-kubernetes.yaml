@@ -157,8 +157,7 @@ spec:
         metadata:
           name: provider-argocd-providerconfig
         spec:
-          #          serverAddr: argocd-server.argocd.svc:443
-          insecure: true
+          #          serverUrl: https://argocd-server.argocd.svc:443
           credentials:
             source: Secret
             secretRef:
