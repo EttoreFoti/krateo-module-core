@@ -231,24 +231,24 @@ spec:
                         apiToken:
                           description: Keptn api token
                           type: string
-                    postgresql:
-                      description: postgresql for krateo-dashboard-backend helm chart values
-                      type: object
-                      properties:
-                        securityContext:
-                          description: postgresql for krateo-dashboard-backend helm chart securityContext values
-                          type: object
-                          properties:
-                            enabled:
-                              description: postgresql for krateo-dashboard-backend helm chart securityContext enabled values
-                              type: boolean
-                        containerSecurityContext:
-                          description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext values
-                          type: object
-                          properties:
-                            enabled:
-                              description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext enabled values
-                              type: boolean
+                    # postgresql:
+                    #   description: postgresql for krateo-dashboard-backend helm chart values
+                    #   type: object
+                    #   properties:
+                    #     securityContext:
+                    #       description: postgresql for krateo-dashboard-backend helm chart securityContext values
+                    #       type: object
+                    #       properties:
+                    #         enabled:
+                    #           description: postgresql for krateo-dashboard-backend helm chart securityContext enabled values
+                    #           type: boolean
+                    #     containerSecurityContext:
+                    #       description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext values
+                    #       type: object
+                    #       properties:
+                    #         enabled:
+                    #           description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext enabled values
+                    #           type: boolean
               type: object
           type: object
           required:

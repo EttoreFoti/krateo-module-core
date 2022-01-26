@@ -282,6 +282,19 @@ spec:
               repository: https://krateoplatformops.github.io/krateo-dashboard
               version: 0.3.113
             namespace: krateo-system
+            values:
+              postgresql:
+                volumePermissions:
+                  enabled: false
+                  securityContext:
+                    runAsUser: "auto"
+                securityContext:
+                  enabled: false
+                shmVolume:
+                  chmod:
+                    enabled: false
+                containerSecurityContext:
+                  enabled: false
       patches:
         - fromFieldPath: "spec.krateo-dashboard.version"
           toFieldPath: "spec.forProvider.chart.version"
@@ -343,7 +356,7 @@ spec:
           toFieldPath: "spec.forProvider.values.ingress.tls.enabled"
         - fromFieldPath: "spec.lighthouse.enabled"
           toFieldPath: "spec.forProvider.values.lighthouse.enabled"
-        - fromFieldPath: "spec.krateo-dashboard.postgresql.securityContext.enabled"
-          toFieldPath: "spec.forProvider.values.postgresql.securityContext.enabled"
-        - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
-          toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
+        # - fromFieldPath: "spec.krateo-dashboard.postgresql.securityContext.enabled"
+        #   toFieldPath: "spec.forProvider.values.postgresql.securityContext.enabled"
+        # - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
+        #   toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
