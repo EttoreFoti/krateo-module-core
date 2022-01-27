@@ -99,6 +99,8 @@ spec:
                   route:
                     enabled: true
       patches:
+        - fromFieldPath: "spec.argo-cd.redis.securityContext"
+          toFieldPath: "spec.forProvider.spec.redis.securityContext"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
@@ -285,7 +287,7 @@ spec:
             values:
               postgresql:
                 volumePermissions:
-                  enabled: false
+                  enabled: true
                   securityContext:
                     runAsUser: "auto"
                 securityContext:
