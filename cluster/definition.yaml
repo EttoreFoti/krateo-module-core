@@ -279,10 +279,10 @@ spec:
                             securityContext:
                               description: Init container Security Context
                               type: object
-                              # properties:
-                              #   runAsUser:
-                              #     description: 'auto' is especially useful for OpenShift which has scc with dynamic userids (and 0 is not allowed).
-                              #     type: string
+                              properties:
+                                runAsUser:
+                                  # description: 'auto' is especially useful for OpenShift which has scc with dynamic userids (and 0 is not allowed).
+                                  type: string
                         shmVolume:
                           description: shmVolume configuration
                           type: object
