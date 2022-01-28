@@ -260,9 +260,9 @@ spec:
                             snapshotName:
                               description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas. ref: https://kubernetes.io/docs/concepts/storage/volume-snapshots/.
                               type: string
-                            size:
-                              description: PVC Storage Request for PostgreSQL volume
-                              type: string
+                            # size:
+                            #   description: PVC Storage Request for PostgreSQL volume
+                            #   type: string
                             # annotations:
                             #   description: Annotations for the PVC
                             #   type: object
