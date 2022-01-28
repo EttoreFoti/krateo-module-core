@@ -242,61 +242,61 @@ spec:
                             enabled:
                               description: Enable persistence using PVC
                               type: boolean
-                            existingClaim:
-                              description: Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template. If defined, PVC must be created manually before volume will be bound. The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
-                              type: string
-                            mountPath:
-                              description: The path the volume will be mounted at, useful when using different PostgreSQL images.
-                              type: string
-                            subPath:
-                              description: The subdirectory of the volume to mount to. Useful in dev environments and one PV for multiple services.
-                              type: string
-                            storageClass:
-                              description: PVC Storage Class for PostgreSQL volume. If defined, storageClassName: <storageClass>. If set to "-", storageClassName: "", which disables dynamic provisioning. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack)
-                              type: string
-                            accessModes:
-                              description: PVC Access Mode for PostgreSQL volume
-                              type: array
-                            snapshotName:
-                              description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas. ref: https://kubernetes.io/docs/concepts/storage/volume-snapshots/.
-                              type: string
-                            size:
-                              description: PVC Storage Request for PostgreSQL volume
-                              type: string
-                            annotations:
-                              description: Annotations for the PVC
-                              type: object
-                            selector:
-                              description: Selector to match an existing Persistent Volume (this value is evaluated as a template).
-                              type: object
-                        volumePermissions:
-                          description: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
-                          type: object
-                          properties:
-                            enabled:
-                              description: Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
-                              type: boolean
-                            securityContext:
-                              description: Init container Security Context
-                              type: object
-                              properties:
-                                runAsUser:
-                                  description: "auto" is especially useful for OpenShift which has scc with dynamic userids (and 0 is not allowed).
-                                  type: string
-                        shmVolume:
-                          description: shmVolume configuration
-                          type: object
-                          properties:
-                            enabled:
-                              description: Enable emptyDir volume for /dev/shm for primary and read replica(s) Pod(s). Set `shmVolume.enabled` to `true` to mount a new tmpfs volume to remove the above limitation.
-                              type: boolean
-                            chmod:
-                              description: shmVolume.chmod configuration
-                              type: object
-                              properties:
-                                enabled:
-                                  description: Set to `true` to `chmod 777 /dev/shm` on a initContainer (ignored if `volumePermissions.enabled` is `false`)
-                                  type: boolean
+                        #     existingClaim:
+                        #       description: Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template. If defined, PVC must be created manually before volume will be bound. The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
+                        #       type: string
+                        #     mountPath:
+                        #       description: The path the volume will be mounted at, useful when using different PostgreSQL images.
+                        #       type: string
+                        #     subPath:
+                        #       description: The subdirectory of the volume to mount to. Useful in dev environments and one PV for multiple services.
+                        #       type: string
+                        #     storageClass:
+                        #       description: PVC Storage Class for PostgreSQL volume. If defined, storageClassName: <storageClass>. If set to "-", storageClassName: "", which disables dynamic provisioning. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack)
+                        #       type: string
+                        #     accessModes:
+                        #       description: PVC Access Mode for PostgreSQL volume
+                        #       type: array
+                        #     snapshotName:
+                        #       description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas. ref: https://kubernetes.io/docs/concepts/storage/volume-snapshots/.
+                        #       type: string
+                        #     size:
+                        #       description: PVC Storage Request for PostgreSQL volume
+                        #       type: string
+                        #     annotations:
+                        #       description: Annotations for the PVC
+                        #       type: object
+                        #     selector:
+                        #       description: Selector to match an existing Persistent Volume (this value is evaluated as a template).
+                        #       type: object
+                        # volumePermissions:
+                        #   description: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
+                        #   type: object
+                        #   properties:
+                        #     enabled:
+                        #       description: Enable init container that changes volume permissions in the data directory (for cases where the default k8s `runAsUser` and `fsUser` values do not work)
+                        #       type: boolean
+                        #     securityContext:
+                        #       description: Init container Security Context
+                        #       type: object
+                        #       properties:
+                        #         runAsUser:
+                        #           description: "auto" is especially useful for OpenShift which has scc with dynamic userids (and 0 is not allowed).
+                        #           type: string
+                        # shmVolume:
+                        #   description: shmVolume configuration
+                        #   type: object
+                        #   properties:
+                        #     enabled:
+                        #       description: Enable emptyDir volume for /dev/shm for primary and read replica(s) Pod(s). Set `shmVolume.enabled` to `true` to mount a new tmpfs volume to remove the above limitation.
+                        #       type: boolean
+                        #     chmod:
+                        #       description: shmVolume.chmod configuration
+                        #       type: object
+                        #       properties:
+                        #         enabled:
+                        #           description: Set to `true` to `chmod 777 /dev/shm` on a initContainer (ignored if `volumePermissions.enabled` is `false`)
+                        #           type: boolean
                         securityContext:
                           description: postgresql for krateo-dashboard-backend helm chart securityContext values
                           type: object
