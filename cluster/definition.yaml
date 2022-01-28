@@ -251,15 +251,15 @@ spec:
                             subPath:
                               description: The subdirectory of the volume to mount to. Useful in dev environments and one PV for multiple services.
                               type: string
-                            # storageClass:
-                            #   description: PVC Storage Class for PostgreSQL volume. If defined, storageClassName: <storageClass>. If set to "-", storageClassName: "", which disables dynamic provisioning. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack)
-                            #   type: string
-                            # accessModes:
-                            #   description: PVC Access Mode for PostgreSQL volume
-                            #   type: array
-                            # snapshotName:
-                            #   description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas. ref: https://kubernetes.io/docs/concepts/storage/volume-snapshots/.
-                            #   type: string
+                            storageClass:
+                              description: PVC Storage Class for PostgreSQL volume. If defined, storageClassName: <storageClass>. If set to "-", storageClassName: "", which disables dynamic provisioning. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack)
+                              type: string
+                            accessModes:
+                              description: PVC Access Mode for PostgreSQL volume
+                              type: array
+                            snapshotName:
+                              description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas. ref: https://kubernetes.io/docs/concepts/storage/volume-snapshots/.
+                              type: string
                             # size:
                             #   description: PVC Storage Request for PostgreSQL volume
                             #   type: string
