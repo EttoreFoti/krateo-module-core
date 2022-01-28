@@ -242,15 +242,15 @@ spec:
                             enabled:
                               description: Enable persistence using PVC
                               type: boolean
-                            # existingClaim:
-                            #   description: Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template. If defined, PVC must be created manually before volume will be bound. The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
-                            #   type: string
-                            # mountPath:
-                            #   description: The path the volume will be mounted at, useful when using different PostgreSQL images.
-                            #   type: string
-                            # subPath:
-                            #   description: The subdirectory of the volume to mount to. Useful in dev environments and one PV for multiple services.
-                            #   type: string
+                            existingClaim:
+                              description: Provide an existing `PersistentVolumeClaim`, the value is evaluated as a template. If defined, PVC must be created manually before volume will be bound. The value is evaluated as a template, so, for example, the name can depend on .Release or .Chart
+                              type: string
+                            mountPath:
+                              description: The path the volume will be mounted at, useful when using different PostgreSQL images.
+                              type: string
+                            subPath:
+                              description: The subdirectory of the volume to mount to. Useful in dev environments and one PV for multiple services.
+                              type: string
                             # storageClass:
                             #   description: PVC Storage Class for PostgreSQL volume. If defined, storageClassName: <storageClass>. If set to "-", storageClassName: "", which disables dynamic provisioning. If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner.  (gp2 on AWS, standard on GKE, AWS & OpenStack)
                             #   type: string
