@@ -30,89 +30,153 @@ spec:
       readinessChecks:
         - type: None
     - base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
+        kind: ArgoCD
+        apiVersion: argoproj.io/v1alpha1
+        metadata:
+          name: argocd
+          namespace: krateo-system
         spec:
-          forProvider:
-            manifest:
-              kind: ArgoCD
-              apiVersion: argoproj.io/v1alpha1
-              metadata:
-                name: argocd
-                namespace: krateo-system
-              spec:
-                controller:
-                  resources:
-                    limits:
-                      cpu: 2000m
-                      memory: 2048Mi
-                    requests:
-                      cpu: 250m
-                      memory: 1024Mi
-                dex:
-                  openShiftOAuth: true
-                  resources:
-                    limits:
-                      cpu: 500m
-                      memory: 256Mi
-                    requests:
-                      cpu: 250m
-                      memory: 128Mi
-                ha:
-                  enabled: false
-                  resources:
-                    limits:
-                      cpu: 500m
-                      memory: 256Mi
-                    requests:
-                      cpu: 250m
-                      memory: 128Mi
-                rbac:
-                  defaultPolicy: ''
-                  policy: |
-                    g, system:cluster-admins, role:admin
-                  scopes: '[groups]'
-                redis:
-                  resources:
-                    limits:
-                      cpu: 500m
-                      memory: 256Mi
-                    requests:
-                      cpu: 250m
-                      memory: 128Mi
-                repo:
-                  resources:
-                    limits:
-                      cpu: 1000m
-                      memory: 1024Mi
-                    requests:
-                      cpu: 250m
-                      memory: 256Mi
-                server:
-                  resources:
-                    limits:
-                      cpu: 500m
-                      memory: 256Mi
-                    requests:
-                      cpu: 125m
-                      memory: 128Mi
-                  route:
-                    enabled: true
-      patches:
-        - fromFieldPath: "spec.argo-cd.redis.securityContext"
-          toFieldPath: "spec.forProvider.spec.redis.securityContext"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-provider-k8s-providerconfig-incluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-operator-argocd"
+          controller:
+            resources:
+              limits:
+                cpu: 2000m
+                memory: 2048Mi
+              requests:
+                cpu: 250m
+                memory: 1024Mi
+          dex:
+            openShiftOAuth: true
+            resources:
+              limits:
+                cpu: 500m
+                memory: 256Mi
+              requests:
+                cpu: 250m
+                memory: 128Mi
+          ha:
+            enabled: false
+            resources:
+              limits:
+                cpu: 500m
+                memory: 256Mi
+              requests:
+                cpu: 250m
+                memory: 128Mi
+          rbac:
+            defaultPolicy: ''
+            policy: |
+              g, system:cluster-admins, role:admin
+            scopes: '[groups]'
+          redis:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 256Mi
+              requests:
+                cpu: 250m
+                memory: 128Mi
+          repo:
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 1024Mi
+              requests:
+                cpu: 250m
+                memory: 256Mi
+          server:
+            resources:
+              limits:
+                cpu: 500m
+                memory: 256Mi
+              requests:
+                cpu: 125m
+                memory: 128Mi
+            route:
+              enabled: true
+    # - base:
+    #     apiVersion: kubernetes.crossplane.io/v1alpha1
+    #     kind: Object
+    #     spec:
+    #       forProvider:
+    #         manifest:
+    #           kind: ArgoCD
+    #           apiVersion: argoproj.io/v1alpha1
+    #           metadata:
+    #             name: argocd
+    #             namespace: krateo-system
+    #           spec:
+    #             controller:
+    #               resources:
+    #                 limits:
+    #                   cpu: 2000m
+    #                   memory: 2048Mi
+    #                 requests:
+    #                   cpu: 250m
+    #                   memory: 1024Mi
+    #             dex:
+    #               openShiftOAuth: true
+    #               resources:
+    #                 limits:
+    #                   cpu: 500m
+    #                   memory: 256Mi
+    #                 requests:
+    #                   cpu: 250m
+    #                   memory: 128Mi
+    #             ha:
+    #               enabled: false
+    #               resources:
+    #                 limits:
+    #                   cpu: 500m
+    #                   memory: 256Mi
+    #                 requests:
+    #                   cpu: 250m
+    #                   memory: 128Mi
+    #             rbac:
+    #               defaultPolicy: ''
+    #               policy: |
+    #                 g, system:cluster-admins, role:admin
+    #               scopes: '[groups]'
+    #             redis:
+    #               resources:
+    #                 limits:
+    #                   cpu: 500m
+    #                   memory: 256Mi
+    #                 requests:
+    #                   cpu: 250m
+    #                   memory: 128Mi
+    #             repo:
+    #               resources:
+    #                 limits:
+    #                   cpu: 1000m
+    #                   memory: 1024Mi
+    #                 requests:
+    #                   cpu: 250m
+    #                   memory: 256Mi
+    #             server:
+    #               resources:
+    #                 limits:
+    #                   cpu: 500m
+    #                   memory: 256Mi
+    #                 requests:
+    #                   cpu: 125m
+    #                   memory: 128Mi
+    #               route:
+    #                 enabled: true
+    #   patches:
+    #     - fromFieldPath: "spec.argo-cd.redis.securityContext"
+    #       toFieldPath: "spec.forProvider.spec.redis.securityContext"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-k8s-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-operator-argocd"
     # - base:
     #     apiVersion: kubernetes.crossplane.io/v1alpha1
     #     kind: Object
@@ -358,7 +422,35 @@ spec:
           toFieldPath: "spec.forProvider.values.ingress.tls.enabled"
         - fromFieldPath: "spec.lighthouse.enabled"
           toFieldPath: "spec.forProvider.values.lighthouse.enabled"
-        # - fromFieldPath: "spec.krateo-dashboard.postgresql.securityContext.enabled"
-        #   toFieldPath: "spec.forProvider.values.postgresql.securityContext.enabled"
-        # - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
-        #   toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.existingClaim"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.existingClaim"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.mountPath"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.mountPath"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.subPath"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.subPath"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.storageClass"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.storageClass"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.accessModes"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.accessModes"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.snapshotName"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.snapshotName"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.size"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.size"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.annotations"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.annotations"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.persistence.selector"
+          toFieldPath: "spec.forProvider.values.postgresql.persistence.selector"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.volumePermissions.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.volumePermissions.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.volumePermissions.securityContext.runAsUser"
+          toFieldPath: "spec.forProvider.values.postgresql.volumePermissions.securityContext.runAsUser"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.securityContext.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.securityContext.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.shmVolume.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.shmVolume.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.shmVolume.chmod.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.shmVolume.chmod.enabled"
+        - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
+          toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
