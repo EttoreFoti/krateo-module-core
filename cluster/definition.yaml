@@ -260,15 +260,15 @@ spec:
                             snapshotName:
                               description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas.
                               type: string
-                            # size:
-                            #   description: PVC Storage Request for PostgreSQL volume
-                            #   type: string
-                            # annotations:
-                            #   description: Annotations for the PVC
-                            #   type: object
-                            # selector:
-                            #   description: Selector to match an existing Persistent Volume (this value is evaluated as a template).
-                            #   type: object
+                            size:
+                              description: PVC Storage Request for PostgreSQL volume
+                              type: string
+                            annotations:
+                              description: Annotations for the PVC
+                              type: object
+                            selector:
+                              description: Selector to match an existing Persistent Volume (this value is evaluated as a template).
+                              type: object
                         volumePermissions:
                           description: Change the owner of the persist volume mountpoint to RunAsUser:fsGroup
                           type: object
