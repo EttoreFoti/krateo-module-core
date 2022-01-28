@@ -283,20 +283,20 @@ spec:
                         #         runAsUser:
                         #           description: "auto" is especially useful for OpenShift which has scc with dynamic userids (and 0 is not allowed).
                         #           type: string
-                        # shmVolume:
-                        #   description: shmVolume configuration
-                        #   type: object
-                        #   properties:
-                        #     enabled:
-                        #       description: Enable emptyDir volume for /dev/shm for primary and read replica(s) Pod(s). Set `shmVolume.enabled` to `true` to mount a new tmpfs volume to remove the above limitation.
-                        #       type: boolean
-                        #     chmod:
-                        #       description: shmVolume.chmod configuration
-                        #       type: object
-                        #       properties:
-                        #         enabled:
-                        #           description: Set to `true` to `chmod 777 /dev/shm` on a initContainer (ignored if `volumePermissions.enabled` is `false`)
-                        #           type: boolean
+                        shmVolume:
+                          description: shmVolume configuration
+                          type: object
+                          properties:
+                            enabled:
+                              description: Enable emptyDir volume for /dev/shm for primary and read replica(s) Pod(s). Set `shmVolume.enabled` to `true` to mount a new tmpfs volume to remove the above limitation.
+                              type: boolean
+                            chmod:
+                              description: shmVolume.chmod configuration
+                              type: object
+                              properties:
+                                enabled:
+                                  description: Set to `true` to `chmod 777 /dev/shm` on a initContainer (ignored if `volumePermissions.enabled` is `false`)
+                                  type: boolean
                         securityContext:
                           description: postgresql for krateo-dashboard-backend helm chart securityContext values
                           type: object
