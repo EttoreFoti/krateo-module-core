@@ -254,9 +254,9 @@ spec:
                             storageClass:
                               description: PVC Storage Class for PostgreSQL volume.
                               type: string
-                            accessModes:
-                              description: PVC Access Mode for PostgreSQL volume
-                              type: array
+                            # accessModes:
+                            #   description: PVC Access Mode for PostgreSQL volume
+                            #   type: array
                             snapshotName:
                               description: Provide a VolumeSnapshot name which to create the PVC. The same snapshot will be used for the primary and any read replicas.
                               type: string
