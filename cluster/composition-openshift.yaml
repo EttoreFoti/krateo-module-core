@@ -30,153 +30,91 @@ spec:
       readinessChecks:
         - type: None
     - base:
-        kind: ArgoCD
-        apiVersion: argoproj.io/v1alpha1
-        metadata:
-          name: argocd
-          namespace: krateo-system
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
         spec:
-          controller:
-            resources:
-              limits:
-                cpu: 2000m
-                memory: 2048Mi
-              requests:
-                cpu: 250m
-                memory: 1024Mi
-          dex:
-            openShiftOAuth: true
-            resources:
-              limits:
-                cpu: 500m
-                memory: 256Mi
-              requests:
-                cpu: 250m
-                memory: 128Mi
-          ha:
-            enabled: false
-            resources:
-              limits:
-                cpu: 500m
-                memory: 256Mi
-              requests:
-                cpu: 250m
-                memory: 128Mi
-          rbac:
-            defaultPolicy: ''
-            policy: |
-              g, system:cluster-admins, role:admin
-            scopes: '[groups]'
-          redis:
-            resources:
-              limits:
-                cpu: 500m
-                memory: 256Mi
-              requests:
-                cpu: 250m
-                memory: 128Mi
-          repo:
-            resources:
-              limits:
-                cpu: 1000m
-                memory: 1024Mi
-              requests:
-                cpu: 250m
-                memory: 256Mi
-          server:
-            resources:
-              limits:
-                cpu: 500m
-                memory: 256Mi
-              requests:
-                cpu: 125m
-                memory: 128Mi
-            route:
-              enabled: true
-    # - base:
-    #     apiVersion: kubernetes.crossplane.io/v1alpha1
-    #     kind: Object
-    #     spec:
-    #       forProvider:
-    #         manifest:
-    #           kind: ArgoCD
-    #           apiVersion: argoproj.io/v1alpha1
-    #           metadata:
-    #             name: argocd
-    #             namespace: krateo-system
-    #           spec:
-    #             controller:
-    #               resources:
-    #                 limits:
-    #                   cpu: 2000m
-    #                   memory: 2048Mi
-    #                 requests:
-    #                   cpu: 250m
-    #                   memory: 1024Mi
-    #             dex:
-    #               openShiftOAuth: true
-    #               resources:
-    #                 limits:
-    #                   cpu: 500m
-    #                   memory: 256Mi
-    #                 requests:
-    #                   cpu: 250m
-    #                   memory: 128Mi
-    #             ha:
-    #               enabled: false
-    #               resources:
-    #                 limits:
-    #                   cpu: 500m
-    #                   memory: 256Mi
-    #                 requests:
-    #                   cpu: 250m
-    #                   memory: 128Mi
-    #             rbac:
-    #               defaultPolicy: ''
-    #               policy: |
-    #                 g, system:cluster-admins, role:admin
-    #               scopes: '[groups]'
-    #             redis:
-    #               resources:
-    #                 limits:
-    #                   cpu: 500m
-    #                   memory: 256Mi
-    #                 requests:
-    #                   cpu: 250m
-    #                   memory: 128Mi
-    #             repo:
-    #               resources:
-    #                 limits:
-    #                   cpu: 1000m
-    #                   memory: 1024Mi
-    #                 requests:
-    #                   cpu: 250m
-    #                   memory: 256Mi
-    #             server:
-    #               resources:
-    #                 limits:
-    #                   cpu: 500m
-    #                   memory: 256Mi
-    #                 requests:
-    #                   cpu: 125m
-    #                   memory: 128Mi
-    #               route:
-    #                 enabled: true
-    #   patches:
-    #     - fromFieldPath: "spec.argo-cd.redis.securityContext"
-    #       toFieldPath: "spec.forProvider.spec.redis.securityContext"
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: spec.providerConfigRef.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-provider-k8s-providerconfig-incluster"
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: metadata.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-operator-argocd"
+          forProvider:
+            manifest:
+              kind: ArgoCD
+              apiVersion: argoproj.io/v1alpha1
+              metadata:
+                name: argocd
+                namespace: krateo-system
+              spec:
+                controller:
+                  resources:
+                    limits:
+                      cpu: 2000m
+                      memory: 2048Mi
+                    requests:
+                      cpu: 250m
+                      memory: 1024Mi
+                dex:
+                  openShiftOAuth: true
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                ha:
+                  enabled: false
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                rbac:
+                  defaultPolicy: ''
+                  policy: |
+                    g, system:cluster-admins, role:admin
+                  scopes: '[groups]'
+                redis:
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                repo:
+                  resources:
+                    limits:
+                      cpu: 1000m
+                      memory: 1024Mi
+                    requests:
+                      cpu: 250m
+                      memory: 256Mi
+                server:
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 125m
+                      memory: 128Mi
+                  route:
+                    enabled: true
+      patches:
+        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
+          toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
+        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
+          toFieldPath: "spec.forProvider.values.redis.securityContext.runAsUser"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-k8s-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-operator-argocd"
     # - base:
     #     apiVersion: kubernetes.crossplane.io/v1alpha1
     #     kind: Object
