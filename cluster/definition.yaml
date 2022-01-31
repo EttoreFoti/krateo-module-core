@@ -203,13 +203,13 @@ spec:
                         securityContext:
                           description: Argo-cd helm chart redis securityContext values
                           type: object
-                          properties:
-                            runAsUser:
-                              description: Argo-cd helm chart redis securityContext runAsUser value
-                              type: object
-                            runAsNonRoot:
-                              description: Argo-cd helm chart redis securityContext runAsNonRoot value
-                              type: object
+                          # properties:
+                          #   runAsUser:
+                          #     description: Argo-cd helm chart redis securityContext runAsUser value
+                          #     type: object
+                          #   runAsNonRoot:
+                          #     description: Argo-cd helm chart redis securityContext runAsNonRoot value
+                          #     type: object
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object

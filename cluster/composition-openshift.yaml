@@ -99,6 +99,8 @@ spec:
                   route:
                     enabled: true
       patches:
+        - fromFieldPath: "spec.argo-cd.redis.securityContext"
+          toFieldPath: "spec.forProvider.values.redis.securityContext"
         - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
           toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
         - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
