@@ -206,10 +206,10 @@ spec:
                           properties:
                             runAsUser:
                               description: Argo-cd helm chart redis securityContext runAsUser value
-                              type: string
+                              type: object
                             runAsNonRoot:
                               description: Argo-cd helm chart redis securityContext runAsNonRoot value
-                              type: string
+                              type: object
                 krateo-dashboard:
                   description: krateo-dashboard helm chart values
                   type: object
