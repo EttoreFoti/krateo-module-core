@@ -231,6 +231,7 @@ spec:
               namespace: krateo-system
               name: argocd-initial-admin-secret
               key: password
+          debugClient: true
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: metadata.name
