@@ -38,7 +38,7 @@ spec:
               kind: ArgoCD
               apiVersion: argoproj.io/v1alpha1
               metadata:
-                name: argocd
+                name: krateo-argocd
                 namespace: krateo-system
               spec:
                 controller:
@@ -229,8 +229,8 @@ spec:
             source: Secret
             secretRef:
               namespace: krateo-system
-              name: argocd-initial-admin-secret
-              key: password
+              name: krateo-argocd-cluster
+              key: admin.password
           debugClient: true
       patches:
         - fromFieldPath: metadata.name
