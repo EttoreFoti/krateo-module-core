@@ -259,7 +259,7 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-argocd-server.krateo-system.svc:443"
+                fmt: "krateo-argocd-server.krateo-system.svc:443"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap
