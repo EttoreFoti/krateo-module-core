@@ -239,7 +239,7 @@ spec:
         metadata:
           name: provider-argocd-providerconfig
         spec:
-          serverUrl: krateo-argocd-server.krateo-system.svc:443
+          serverUrl: https://krateo-argocd-server.krateo-system.svc:443
           credentials:
             source: Secret
             secretRef:
