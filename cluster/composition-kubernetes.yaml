@@ -252,6 +252,8 @@ spec:
           toFieldPath: "spec.forProvider.values.backendUrl"
         - fromFieldPath: "spec.sonarqube.token"
           toFieldPath: "spec.forProvider.values.sonarqube.token"
+        - fromFieldPath: "spec.sonarqube.target"
+          toFieldPath: "spec.forProvider.values.sonarqube.target"
         - fromFieldPath: "spec.grafana.target"
           toFieldPath: "spec.forProvider.values.grafana.target"
         - fromFieldPath: "spec.grafana.token"
