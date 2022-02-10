@@ -188,6 +188,60 @@ spec:
                     token:
                       description: SonarQube token
                       type: string
+                    target:
+                      description: SonarQube target
+                      type: string
+                ldap:
+                  description: ldap values
+                  type: object
+                  properties:
+                    enabled:
+                      description: ldap enabled
+                      type: boolean
+                    secret:
+                      description: ldap secret
+                      type: string
+                    target:
+                      description: ldap target
+                      type: string
+                    bind:
+                      description: ldap bind
+                      type: object
+                      properties:
+                        dn:
+                          description: ldap bind dn
+                          type: string
+                        secret:
+                          description: ldap bind secret
+                          type: string
+                    users:
+                      description: ldap users
+                      type: object
+                      properties:
+                        dn:
+                          description: ldap users dn
+                          type: string
+                        options:
+                          description: ldap users
+                          type: object
+                          properties:
+                            filter:
+                              description: ldap users filter
+                              type: string
+                    groups:
+                      description: ldap groups
+                      type: object
+                      properties:
+                        dn:
+                          description: ldap users dn
+                          type: string
+                        options:
+                          description: ldap users
+                          type: object
+                          properties:
+                            filter:
+                              description: ldap groups filter
+                              type: string
                 argo-cd:
                   description: Argo-cd helm chart values
                   type: object
