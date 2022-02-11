@@ -4,7 +4,7 @@ metadata:
   #  name: demostacks.gcp-stack-template-plus.projectkerberus.io
   name: core.modules.krateo.io
   labels:
-    provider: kubernetes
+    platform: kubernetes
 spec:
   #  writeConnectionSecretsToNamespace: crossplane-system
   writeConnectionSecretsToNamespace: krateo-system
