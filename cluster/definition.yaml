@@ -193,7 +193,7 @@ spec:
                               type: boolean
                             url:
                               description: Krateo dashboard GitHub provider enterprise url
-                              type: string  
+                              type: string
                 sonarqube:
                   description: SonarQube values
                   type: object
@@ -299,6 +299,8 @@ spec:
                               description: krateo-dashboard frontend image pullPolicy
                               type: string
                     backend:
+                      description: krateo-dashboard backend image values
+                      type: object
                       properties:
                         image:
                           description: krateo-dashboard backend image values
