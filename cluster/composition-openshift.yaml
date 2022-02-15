@@ -2,7 +2,7 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
   #  name: demostacks.gcp-stack-template-plus.projectkerberus.io
-  name: core.modules.krateo.io
+  name: ocp.core.modules.krateo.io
   labels:
     platform: openshift
 spec:
