@@ -184,6 +184,16 @@ spec:
                         token:
                           description: Krateo dashboard GitHub provider token
                           type: string
+                        enterprise:
+                          description: Krateo dashboard GitHub provider enterprise
+                          type: object
+                          properties:
+                            enabled:
+                              description: Krateo dashboard GitHub provider enterprise enabled
+                              type: boolean
+                            url:
+                              description: Krateo dashboard GitHub provider enterprise url
+                              type: string  
                 sonarqube:
                   description: SonarQube values
                   type: object
@@ -272,15 +282,37 @@ spec:
                   type: object
                   properties:
                     frontend:
-                      image:
-                        repository: ghcr.io/krateoplatformops/krateo-dashboard-frontend
-                        tag: 1.3.22
-                        pullPolicy: Always
+                      description: krateo-dashboard frontend image values
+                      type: object
+                      properties:
+                        image:
+                          description: krateo-dashboard frontend image values
+                          type: object
+                          properties:
+                            repository:
+                              description: krateo-dashboard frontend image repository
+                              type: string
+                            tag:
+                              description: krateo-dashboard frontend image tag
+                              type: string
+                            pullPolicy:
+                              description: krateo-dashboard frontend image pullPolicy
+                              type: string
                     backend:
-                      image:
-                        repository: ghcr.io/krateoplatformops/krateo-dashboard-backend
-                        tag: 1.3.14
-                        pullPolicy: Always
+                      properties:
+                        image:
+                          description: krateo-dashboard backend image values
+                          type: object
+                          properties:
+                            repository:
+                              description: krateo-dashboard backend image repository
+                              type: string
+                            tag:
+                              description: krateo-dashboard backend image tag
+                              type: string
+                            pullPolicy:
+                              description: krateo-dashboard backend image pullPolicy
+                              type: string
                     version:
                       description: krateo-dashboard helm chart version
                       type: string
