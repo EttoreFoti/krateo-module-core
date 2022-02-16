@@ -5,7 +5,7 @@ metadata:
 spec:
   compositionSelector:
     matchLabels:
-      provider: openshift
+      platform: kubernetes
   organization: Krateo PlatformOps Company
   frontendUrl: https://krateo-dashboard.krateo.io
   frontend:
