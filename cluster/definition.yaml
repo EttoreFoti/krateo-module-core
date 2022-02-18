@@ -13,8 +13,8 @@ spec:
     plural: core
     singular: core
   claimNames:
-    kind: Core
-    plural: core
+    kind: CoreClaim
+    plural: coreclaims
   versions:
     - name: v1alpha1
       referenceable: true
