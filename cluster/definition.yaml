@@ -12,9 +12,9 @@ spec:
     listKind: CoreList
     plural: core
     singular: core
-  claimNames:
-    kind: CoreClaim
-    plural: coreclaims
+  # claimNames:
+  #   kind: CoreClaim
+  #   plural: coreclaims
   versions:
     - name: v1alpha1
       referenceable: true
