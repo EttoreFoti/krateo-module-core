@@ -5,7 +5,7 @@ metadata:
 spec:
   compositionSelector:
     matchLabels:
-      provider: openshift
+      platform: openshift
   organization: Krateo PlatformOps Company
   frontendUrl: https://krateo-dashboard.krateo.io
   frontend:
@@ -27,6 +27,16 @@ spec:
   argo-cd:
     version: 3.33.1
   krateo-dashboard:
+    frontend:
+      image:
+        repository: ghcr.io/krateoplatformops/krateo-dashboard-frontend
+        tag: 1.3.22
+        pullPolicy: Always
+    backend:
+      image:
+        repository: ghcr.io/krateoplatformops/krateo-dashboard-backend
+        tag: 1.3.14
+        pullPolicy: Always
     postgresql:
       volumePermissions:
         enabled: false
