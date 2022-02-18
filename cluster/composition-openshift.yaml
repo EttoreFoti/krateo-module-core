@@ -494,3 +494,31 @@ spec:
           toFieldPath: "spec.forProvider.values.backend.image.tag"
         - fromFieldPath: "spec.krateo-dashboard.backend.image.pullPolicy"
           toFieldPath: "spec.forProvider.values.backend.image.pullPolicy"
+    # - base:
+    #     apiVersion: helm.crossplane.io/v1beta1
+    #     kind: Release
+    #     spec:
+    #       forProvider:
+    #         chart:
+    #           name: keptn
+    #           repository: https://charts.keptn.sh
+    #           version: 0.12.1
+    #         namespace: krateo-system
+    #         values:
+    #           global:
+    #             securityContext: {}
+    #   patches:
+    #     - fromFieldPath: "spec.keptn.version"
+    #       toFieldPath: "spec.forProvider.chart.version"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-helm-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-keptn"
