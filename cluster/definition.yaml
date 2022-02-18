@@ -41,6 +41,34 @@ spec:
                         token:
                           description: Krateo dashboard GitHub provider token
                           type: string
+                    oidc:
+                      description: Krateo dashboard oidc providers
+                      type: object
+                      properties:
+                        metadataUrl:
+                          description: Krateo dashboard Oidc metadataUrl
+                          type: string
+                        clientId:
+                          description: Krateo dashboard Oidc clientId
+                          type: string
+                        clientSecret:
+                          description: Krateo dashboard Oidc clientSecret
+                          type: string
+                        authorizationUrl:
+                          description: Krateo dashboard Oidc authorizationUrl
+                          type: string
+                        tokenUrl:
+                          description: Krateo dashboard Oidc tokenUrl
+                          type: string
+                        tokenSignedResponseAlg:
+                          description: Krateo dashboard Oidc tokenSignedResponseAlg
+                          type: string
+                        scope:
+                          description: Krateo dashboard Oidc scope
+                          type: string
+                        prompt:
+                          description: Krateo dashboard Oidc prompt
+                          type: string
                 ingress:
                   description: Ingress definition
                   type: object
