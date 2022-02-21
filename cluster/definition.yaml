@@ -28,6 +28,13 @@ spec:
                   description: Authentication methods
                   type: object
                   properties:
+                    session:
+                      description: Krateo dashboard session secret
+                      type: object
+                      properties:
+                        secret:
+                          description: Session Secret
+                          type: string
                     github:
                       description: Krateo dashboard GitHub providers
                       type: object
@@ -453,7 +460,7 @@ spec:
                       properties:
                         rules:
                           description: Keptn ingress rules
-                          type: array                      
+                          type: array
               type: object
           type: object
           required:

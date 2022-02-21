@@ -377,3 +377,6 @@ spec:
           toFieldPath: "spec.forProvider.values.auth.oidc.scope"
         - fromFieldPath: "spec.auth.oidc.prompt"
           toFieldPath: "spec.forProvider.values.auth.oidc.prompt"
+        # session secret
+        - fromFieldPath: "spec.auth.session.secret"
+          toFieldPath: "spec.forProvider.values.auth.session.secret"
