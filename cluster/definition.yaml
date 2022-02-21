@@ -450,20 +450,22 @@ spec:
                             enabled:
                               description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext enabled values
                               type: boolean
-                # keptn:
-                #   description: Keptn values
-                #   type: object
-                #   properties:
-                #     ingress:
-                #       description: Keptn ingress values
-                #       type: object
-                #       properties:
-                #         rules:
-                #           description: Keptn ingress rules
-                #           type: array
-              type: object
-          type: object
-          required:
-            - frontendUrl
-            - backendUrl
+                keptn:
+                  description: Keptn values
+                  type: object
+                  properties:
+                    ingress:
+                      description: Keptn ingress values
+                      type: object
+                      properties:
+                        rules:
+                          description: Keptn ingress rules
+                          type: array
+                          items:
+                            type: object  
+#              type: object
+#          type: object
+#          required:
+#            - frontendUrl
+#            - backendUrl
       served: true

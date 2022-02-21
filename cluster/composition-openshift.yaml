@@ -4842,5 +4842,5 @@ spec:
             - type: string
               string:
                 fmt: "%s-ingress-api-keptn-ingress"
-        # - fromFieldPath: "spec.keptn.ingress.rules"
-        #   toFieldPath: "spec.forProvider.manifest.spec.rules"
+        - fromFieldPath: "spec.keptn.ingress.rules"
+          toFieldPath: "spec.forProvider.manifest.spec.rules"
