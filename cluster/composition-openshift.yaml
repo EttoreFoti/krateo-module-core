@@ -1450,43 +1450,43 @@ spec:
             - type: string
               string:
                 fmt: "%s-cm-secret-service-config"
-    - base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        spec:
-          forProvider:
-            manifest:
-              # Source: keptn/charts/control-plane/charts/mongo/templates/standalone/pvc.yaml
-              kind: PersistentVolumeClaim
-              apiVersion: v1
-              metadata:
-                name: keptn-mongo
-                namespace: krateo-system
-                labels:
-                  app.kubernetes.io/name: mongo
-                  helm.sh/chart: mongo-10.26.4
-                  app.kubernetes.io/instance: keptn
-                  app.kubernetes.io/managed-by: Helm
-                  app.kubernetes.io/component: mongodb
-              spec:
-                accessModes:
-                  - "ReadWriteOnce"
-                resources:
-                  requests:
-                    storage: "8Gi"
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-provider-k8s-providerconfig-incluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-pvc-keptn-mongo"
+    # - base:
+    #     apiVersion: kubernetes.crossplane.io/v1alpha1
+    #     kind: Object
+    #     spec:
+    #       forProvider:
+    #         manifest:
+    #           # Source: keptn/charts/control-plane/charts/mongo/templates/standalone/pvc.yaml
+    #           kind: PersistentVolumeClaim
+    #           apiVersion: v1
+    #           metadata:
+    #             name: keptn-mongo
+    #             namespace: krateo-system
+    #             labels:
+    #               app.kubernetes.io/name: mongo
+    #               helm.sh/chart: mongo-10.26.4
+    #               app.kubernetes.io/instance: keptn
+    #               app.kubernetes.io/managed-by: Helm
+    #               app.kubernetes.io/component: mongodb
+    #           spec:
+    #             accessModes:
+    #               - "ReadWriteOnce"
+    #             resources:
+    #               requests:
+    #                 storage: "8Gi"
+    #   patches:
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-k8s-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-pvc-keptn-mongo"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -2795,8 +2795,9 @@ spec:
                             subPath:
                     volumes:
                       - name: datadir
-                        persistentVolumeClaim:
-                          claimName: keptn-mongo
+                        emptyDir: {}
+                        # persistentVolumeClaim:
+                        #   claimName: keptn-mongo
       patches:
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
@@ -4842,3 +4843,5 @@ spec:
             - type: string
               string:
                 fmt: "%s-ingress-api-keptn-ingress"
+        - fromFieldPath: "spec.keptn.ingress.rules"
+          toFieldPath: "spec.forProvider.manifest.spec.rules"

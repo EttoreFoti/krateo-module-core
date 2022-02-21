@@ -347,22 +347,22 @@ spec:
                       description: krateo-dashboard helm chart version
                       type: string
                       default: 0.3.131
-                    keptn:
-                      description: Keptn values
-                      type: object
-                      properties:
-                        bridge:
-                          description: Keptn bridge url
-                          type: string
-                        bridgeToken:
-                          description: Keptn bridge token
-                          type: string
-                        api:
-                          description: Keptn api url
-                          type: string
-                        apiToken:
-                          description: Keptn api token
-                          type: string
+                    # keptn:
+                    #   description: Keptn values
+                    #   type: object
+                    #   properties:
+                    #     bridge:
+                    #       description: Keptn bridge url
+                    #       type: string
+                    #     bridgeToken:
+                    #       description: Keptn bridge token
+                    #       type: string
+                    #     api:
+                    #       description: Keptn api url
+                    #       type: string
+                    #     apiToken:
+                    #       description: Keptn api token
+                    #       type: string
                     postgresql:
                       description: postgresql for krateo-dashboard-backend helm chart values
                       type: object
@@ -443,6 +443,17 @@ spec:
                             enabled:
                               description: postgresql for krateo-dashboard-backend helm chart containerSecurityContext enabled values
                               type: boolean
+                keptn:
+                  description: Keptn values
+                  type: object
+                  properties:
+                    ingress:
+                      description: Keptn ingress values
+                      type: object
+                      properties:
+                        rules:
+                          description: Keptn ingress rules
+                          type: array                      
               type: object
           type: object
           required:
