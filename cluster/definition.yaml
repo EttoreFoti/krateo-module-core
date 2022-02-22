@@ -462,7 +462,45 @@ spec:
                           description: Keptn ingress rules
                           type: array
                           items:
-                            type: object  
+                            type: object
+                            properties:
+                              host:
+                                description: Keptn ingress rule host
+                                type: string
+                              http:
+                                description: Keptn ingress rule http
+                                type: object
+                                properties:
+                                  paths:
+                                    description: Keptn ingress rule paths
+                                    type: array
+                                    items:
+                                      type: object
+                                      properties:
+                                        path:
+                                          description: Keptn ingress rule paths
+                                          type: string
+                                        pathType:
+                                          description: Keptn ingress rule pathType
+                                          type: string
+                                        backend:
+                                          description: Keptn ingress rule backend
+                                          type: object
+                                          properties:
+                                            service:
+                                              description: Keptn ingress rule backend service
+                                              type: object
+                                              properties:
+                                                name:
+                                                  description: Keptn ingress rule backend service name
+                                                  type: string
+                                                port:
+                                                  description: Keptn ingress rule backend service port
+                                                  type: object
+                                                  properties:
+                                                    number:
+                                                      description: Keptn ingress rule backend service port number
+                                                      type: integer          
 #              type: object
 #          type: object
 #          required:
