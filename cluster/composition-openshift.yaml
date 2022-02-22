@@ -1502,45 +1502,45 @@ spec:
     #         - type: string
     #           string:
     #             fmt: "%s-pvc-keptn-mongo"
-    - base:
-        apiVersion: kubernetes.crossplane.io/v1alpha1
-        kind: Object
-        spec:
-          forProvider:
-            manifest:
-              # Source: keptn/charts/control-plane/templates/configuration-service.yaml
-              # resource-service
-              apiVersion: v1
-              kind: PersistentVolumeClaim
-              metadata:
-                name: configuration-volume
-                namespace: krateo-system
-                labels:
-                  app.kubernetes.io/name: configuration-volume
-                  app.kubernetes.io/instance: keptn
-                  app.kubernetes.io/managed-by: Helm
-                  app.kubernetes.io/part-of: keptn-krateo-system
-                  app.kubernetes.io/component: control-plane
-                  helm.sh/chart: control-plane-0.1.0
-              spec:
-                accessModes:
-                  - ReadWriteOnce
-                resources:
-                  requests:
-                    storage: 100Mi
-      patches:
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.providerConfigRef.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-provider-k8s-providerconfig-incluster"
-        - fromFieldPath: metadata.name
-          toFieldPath: metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-pvc-configuration-volume"
+    # - base:
+    #     apiVersion: kubernetes.crossplane.io/v1alpha1
+    #     kind: Object
+    #     spec:
+    #       forProvider:
+    #         manifest:
+    #           # Source: keptn/charts/control-plane/templates/configuration-service.yaml
+    #           # resource-service
+    #           apiVersion: v1
+    #           kind: PersistentVolumeClaim
+    #           metadata:
+    #             name: configuration-volume
+    #             namespace: krateo-system
+    #             labels:
+    #               app.kubernetes.io/name: configuration-volume
+    #               app.kubernetes.io/instance: keptn
+    #               app.kubernetes.io/managed-by: Helm
+    #               app.kubernetes.io/part-of: keptn-krateo-system
+    #               app.kubernetes.io/component: control-plane
+    #               helm.sh/chart: control-plane-0.1.0
+    #           spec:
+    #             accessModes:
+    #               - ReadWriteOnce
+    #             resources:
+    #               requests:
+    #                 storage: 100Mi
+    #   patches:
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: spec.providerConfigRef.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-provider-k8s-providerconfig-incluster"
+    #     - fromFieldPath: metadata.name
+    #       toFieldPath: metadata.name
+    #       transforms:
+    #         - type: string
+    #           string:
+    #             fmt: "%s-pvc-configuration-volume"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -3354,8 +3354,9 @@ spec:
                         securityContext: {}
                     volumes:
                       - name: configuration-volume
-                        persistentVolumeClaim:
-                          claimName: configuration-volume
+                        emptyDir: {}
+                        # persistentVolumeClaim:
+                        #   claimName: configuration-volume                          
                     serviceAccountName: keptn-configuration-service
       patches:
         - fromFieldPath: metadata.name
