@@ -255,7 +255,7 @@ spec:
             source: Secret
             secretRef:
               namespace: krateo-system
-              name: krateo-argocd-cluster
+              name: krateo-module-core-argocd-cluster
               key: admin.password
           debugClient: true
       patches:
@@ -266,11 +266,17 @@ spec:
               string:
                 fmt: "%s-provider-argocd-providerconfig"
         - fromFieldPath: metadata.name
+          toFieldPath: spec.credentials.secretRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-cluster"
+        - fromFieldPath: metadata.name
           toFieldPath: spec.serverUrl
           transforms:
             - type: string
               string:
-                fmt: "https://%s-server.krateo-system.svc:443"
+                fmt: "https://%s-argocd-server.krateo-system.svc:443"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap
