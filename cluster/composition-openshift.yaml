@@ -250,7 +250,7 @@ spec:
         metadata:
           name: provider-argocd-providerconfig
         spec:
-          serverUrl: https://krateo-argocd-server.krateo-system.svc:443
+          serverUrl: https://krateo-module-core-argocd-server.krateo-system.svc:443
           credentials:
             source: Secret
             secretRef:
@@ -265,12 +265,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-provider-argocd-providerconfig"
-        # - fromFieldPath: metadata.name
-        #   toFieldPath: spec.serverUrl
-        #   transforms:
-        #     - type: string
-        #       string:
-        #         fmt: "krateo-argocd-server.krateo-system.svc:443"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.serverUrl
+          transforms:
+            - type: string
+              string:
+                fmt: "https://%s-server.krateo-system.svc:443"
     # - base:
     #     apiVersion: v1
     #     kind: ConfigMap
@@ -4848,5 +4848,5 @@ spec:
             - type: string
               string:
                 fmt: "%s-ingress-api-keptn-ingress"
-        - fromFieldPath: "spec.keptn.ingress.rules.items"
-          toFieldPath: "spec.forProvider.manifest.spec.rules.items"
+        - fromFieldPath: "spec.keptn.ingress.rules.items[]"
+          toFieldPath: "spec.forProvider.manifest.spec.rules.items[]"
