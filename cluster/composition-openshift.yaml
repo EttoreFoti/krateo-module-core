@@ -137,6 +137,8 @@ spec:
             - type: string
               string:
                 fmt: "%s-operator-argocd"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
     # - base:
     #     apiVersion: kubernetes.crossplane.io/v1alpha1
     #     kind: Object
@@ -4842,5 +4844,5 @@ spec:
             - type: string
               string:
                 fmt: "%s-ingress-api-keptn-ingress"
-        - fromFieldPath: "spec.keptn.ingress.rules"
-          toFieldPath: "spec.forProvider.manifest.spec.rules"
+        - fromFieldPath: "spec.keptn.ingress.rules[0]"
+          toFieldPath: "spec.forProvider.manifest.spec.rules[0]"
