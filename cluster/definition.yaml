@@ -458,6 +458,20 @@ spec:
                       description: Keptn ingress values
                       type: object
                       properties:
+                        tls:
+                          description: Keptn ingress tls values
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              secretName:
+                                description: Keptn ingress tls secretName
+                                type: string
+                              hosts:
+                                description: Keptn ingress tls hosts
+                                type: array
+                                items:
+                                  type: string
                         rules:
                           description: Keptn ingress rules
                           type: array
@@ -500,7 +514,7 @@ spec:
                                                   properties:
                                                     number:
                                                       description: Keptn ingress rule backend service port number
-                                                      type: integer          
+                                                      type: integer
 #              type: object
 #          type: object
 #          required:

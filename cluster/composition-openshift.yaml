@@ -3356,7 +3356,7 @@ spec:
                       - name: configuration-volume
                         emptyDir: {}
                         # persistentVolumeClaim:
-                        #   claimName: configuration-volume                          
+                        #   claimName: configuration-volume
                     serviceAccountName: keptn-configuration-service
       patches:
         - fromFieldPath: metadata.name
@@ -4857,3 +4857,5 @@ spec:
                 fmt: "%s-ingress-api-keptn-ingress"
         - fromFieldPath: "spec.keptn.ingress.rules"
           toFieldPath: "spec.forProvider.manifest.spec.rules"
+        - fromFieldPath: "spec.keptn.ingress.tls"
+          toFieldPath: "spec.forProvider.manifest.spec.tls"
