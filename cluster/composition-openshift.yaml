@@ -353,6 +353,19 @@ spec:
               repository: https://krateoplatformops.github.io/krateo-dashboard
               version: 0.3.113
             namespace: krateo-system
+            set:
+              - name: keptn.bridgeToken
+                valueFrom:
+                  secretKeyRef:
+                    name: bridge-credentials
+                    namespace: krateo-system
+                    key: BASIC_AUTH_PASSWORD
+              - name: keptn.apiToken
+                valueFrom:
+                  secretKeyRef:
+                    name: keptn-api-token
+                    namespace: krateo-system
+                    key: keptn-api-token
             values:
               postgresql:
                 volumePermissions:
@@ -381,6 +394,18 @@ spec:
             - type: string
               string:
                 fmt: "%s-krateodashboard"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.values.keptn.bridge
+          transforms:
+            - type: string
+              string:
+                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.values.keptn.api
+          transforms:
+            - type: string
+              string:
+                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
         - fromFieldPath: "spec.organization"
           toFieldPath: "spec.forProvider.values.organization"
         - fromFieldPath: "spec.frontendUrl"
@@ -467,14 +492,14 @@ spec:
         - fromFieldPath: "spec.krateo-dashboard.postgresql.containerSecurityContext.enabled"
           toFieldPath: "spec.forProvider.values.postgresql.containerSecurityContext.enabled"
         # keptn
-        - fromFieldPath: "spec.krateo-dashboard.keptn.bridge"
-          toFieldPath: "spec.forProvider.values.keptn.bridge"
-        - fromFieldPath: "spec.krateo-dashboard.keptn.api"
-          toFieldPath: "spec.forProvider.values.keptn.api"
-        - fromFieldPath: "spec.krateo-dashboard.keptn.bridgeToken"
-          toFieldPath: "spec.forProvider.values.keptn.bridgeToken"
-        - fromFieldPath: "spec.krateo-dashboard.keptn.apiToken"
-          toFieldPath: "spec.forProvider.values.keptn.apiToken"
+        # - fromFieldPath: "spec.krateo-dashboard.keptn.bridge"
+        #   toFieldPath: "spec.forProvider.values.keptn.bridge"
+        # - fromFieldPath: "spec.krateo-dashboard.keptn.api"
+        #   toFieldPath: "spec.forProvider.values.keptn.api"
+        # - fromFieldPath: "spec.krateo-dashboard.keptn.bridgeToken"
+        #   toFieldPath: "spec.forProvider.values.keptn.bridgeToken"
+        # - fromFieldPath: "spec.krateo-dashboard.keptn.apiToken"
+        #   toFieldPath: "spec.forProvider.values.keptn.apiToken"
         # ldap
         - fromFieldPath: "spec.ldap.enabled"
           toFieldPath: "spec.forProvider.values.ldap.enabled"
@@ -2276,7 +2301,13 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-svc-api-service"
+                fmt: "%s-svc-keptn-api-service"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-keptn-api-service"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -2355,7 +2386,13 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "%s-svc-bridge"
+                fmt: "%s-svc-keptn-bridge-service"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-keptn-bridge-service"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
