@@ -53,7 +53,7 @@ spec:
               kind: ArgoCD
               apiVersion: argoproj.io/v1alpha1
               metadata:
-                name: krateo-argocd
+                # name: krateo-argocd
                 namespace: krateo-system
               spec:
                 controller:
@@ -119,12 +119,6 @@ spec:
                   route:
                     enabled: true
       patches:
-        - fromFieldPath: "spec.argo-cd.redis.securityContext"
-          toFieldPath: "spec.forProvider.values.redis.securityContext"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
-          toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
-          toFieldPath: "spec.forProvider.values.redis.securityContext.runAsUser"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
           transforms:
@@ -143,6 +137,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd"
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext"
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext.runAsUser"
     # - base:
     #     apiVersion: kubernetes.crossplane.io/v1alpha1
     #     kind: Object
@@ -399,13 +399,15 @@ spec:
           transforms:
             - type: string
               string:
-                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
+#                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
+                fmt: "https://bridge.krateo-system.svc:443/bridge/api"
         - fromFieldPath: metadata.name
           toFieldPath: spec.forProvider.values.keptn.api
           transforms:
             - type: string
               string:
-                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
+#                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
+                fmt: "https://api-service.krateo-system.svc:443/api/v1"
         - fromFieldPath: "spec.organization"
           toFieldPath: "spec.forProvider.values.organization"
         - fromFieldPath: "spec.frontendUrl"
@@ -2302,12 +2304,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-svc-keptn-api-service"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.forProvider.manifest.metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-keptn-api-service"
+        # - fromFieldPath: metadata.name
+        #   toFieldPath: spec.forProvider.manifest.metadata.name
+        #   transforms:
+        #     - type: string
+        #       string:
+        #         fmt: "%s-keptn-api-service"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -2387,12 +2389,12 @@ spec:
             - type: string
               string:
                 fmt: "%s-svc-keptn-bridge-service"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.forProvider.manifest.metadata.name
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-keptn-bridge-service"
+        # - fromFieldPath: metadata.name
+        #   toFieldPath: spec.forProvider.manifest.metadata.name
+        #   transforms:
+        #     - type: string
+        #       string:
+        #         fmt: "%s-keptn-bridge-service"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
