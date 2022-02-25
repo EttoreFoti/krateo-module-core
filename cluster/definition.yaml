@@ -239,29 +239,6 @@ spec:
                     target:
                       description: SonarQube target
                       type: string
-                jenkins:
-                  description: Jenkins values
-                  type: object
-                  properties:
-                    instances:
-                      description: Jenkins instances
-                      type: array
-                      items:
-                        description: Jenkins node
-                        type: object
-                        properties:
-                          name:
-                            description: node name
-                            type: string
-                          baseUrl:
-                            description: node url
-                            type: string
-                          username:
-                            description: node username
-                            type: string
-                          apiKey:
-                            description: node apiKey
-                            type: string
                 ldap:
                   description: ldap values
                   type: object
@@ -339,6 +316,29 @@ spec:
                   description: krateo-dashboard helm chart values
                   type: object
                   properties:
+                    jenkins:
+                      description: Jenkins values
+                      type: object
+                      properties:
+                        instances:
+                          description: Jenkins instances
+                          type: array
+                          items:
+                            description: Jenkins node
+                            type: object
+                            properties:
+                              name:
+                                description: node name
+                                type: string
+                              baseUrl:
+                                description: node url
+                                type: string
+                              username:
+                                description: node username
+                                type: string
+                              apiKey:
+                                description: node apiKey
+                                type: string
                     frontend:
                       description: krateo-dashboard frontend image values
                       type: object

@@ -553,6 +553,9 @@ spec:
         # session secret
         - fromFieldPath: "spec.auth.session.secret"
           toFieldPath: "spec.forProvider.values.auth.session.secret"
+        # Jenkins integration
+        - fromFieldPath: "spec.krateo-dashboard.jenkins.instances"
+          toFieldPath: "spec.forProvider.values.jenkins.instances"
     - base:
         apiVersion: kubernetes.crossplane.io/v1alpha1
         kind: Object
@@ -4898,5 +4901,3 @@ spec:
           toFieldPath: "spec.forProvider.manifest.spec.rules"
         - fromFieldPath: "spec.keptn.ingress.tls"
           toFieldPath: "spec.forProvider.manifest.spec.tls"
-        - fromFieldPath: "spec.jenkins.instances"
-          toFieldPath: "spec.forProvider.values.jenkins.instances"
