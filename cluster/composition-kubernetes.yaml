@@ -380,3 +380,5 @@ spec:
         # session secret
         - fromFieldPath: "spec.auth.session.secret"
           toFieldPath: "spec.forProvider.values.auth.session.secret"
+        - fromFieldPath: "spec.jenkins.instances"
+          toFieldPath: "spec.forProvider.values.jenkins.instances"

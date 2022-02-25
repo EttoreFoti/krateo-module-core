@@ -399,14 +399,14 @@ spec:
           transforms:
             - type: string
               string:
-#                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
+                #                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
                 fmt: "https://bridge.krateo-system.svc:443/bridge/api"
         - fromFieldPath: metadata.name
           toFieldPath: spec.forProvider.values.keptn.api
           transforms:
             - type: string
               string:
-#                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
+                #                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
                 fmt: "https://api-service.krateo-system.svc:443/api/v1"
         - fromFieldPath: "spec.organization"
           toFieldPath: "spec.forProvider.values.organization"
@@ -4898,3 +4898,5 @@ spec:
           toFieldPath: "spec.forProvider.manifest.spec.rules"
         - fromFieldPath: "spec.keptn.ingress.tls"
           toFieldPath: "spec.forProvider.manifest.spec.tls"
+        - fromFieldPath: "spec.jenkins.instances"
+          toFieldPath: "spec.forProvider.values.jenkins.instances"
