@@ -379,6 +379,9 @@ spec:
                     enabled: false
                 containerSecurityContext:
                   enabled: false
+              keptn:
+                bridge: https://bridge.krateo-system.svc:443/bridge/api
+                api: https://api-service.krateo-system.svc:443/api/v1
       patches:
         - fromFieldPath: "spec.krateo-dashboard.version"
           toFieldPath: "spec.forProvider.chart.version"
@@ -394,20 +397,20 @@ spec:
             - type: string
               string:
                 fmt: "%s-krateodashboard"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.forProvider.values.keptn.bridge
-          transforms:
-            - type: string
-              string:
-                #                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
-                fmt: "https://bridge.krateo-system.svc:443/bridge/api"
-        - fromFieldPath: metadata.name
-          toFieldPath: spec.forProvider.values.keptn.api
-          transforms:
-            - type: string
-              string:
-                #                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
-                fmt: "https://api-service.krateo-system.svc:443/api/v1"
+        # - fromFieldPath: metadata.name
+        #   toFieldPath: spec.forProvider.values.keptn.bridge
+        #   transforms:
+        #     - type: string
+        #       string:
+        #         #                fmt: "https://%s-keptn-bridge-service.krateo-system.svc:443"
+        #         fmt: "https://bridge.krateo-system.svc:443/bridge/api"
+        # - fromFieldPath: metadata.name
+        #   toFieldPath: spec.forProvider.values.keptn.api
+        #   transforms:
+        #     - type: string
+        #       string:
+        #         #                fmt: "https://%s-keptn-api-service.krateo-system.svc:443"
+        #         fmt: "https://api-service.krateo-system.svc:443/api/v1"
         - fromFieldPath: "spec.organization"
           toFieldPath: "spec.forProvider.values.organization"
         - fromFieldPath: "spec.frontendUrl"
