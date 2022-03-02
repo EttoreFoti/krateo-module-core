@@ -380,7 +380,7 @@ spec:
                 containerSecurityContext:
                   enabled: false
               keptn:
-                bridge: https://bridge.krateo-system.svc:8080/bridge/api
+                bridge: http://bridge.krateo-system.svc:8080/bridge/api
                 #api: https://api-service.krateo-system.svc:8080/api/v1
                 api: http://api-gateway-nginx.krateo-system.svc/api/v1
 
