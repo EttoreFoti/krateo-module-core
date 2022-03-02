@@ -382,7 +382,7 @@ spec:
               keptn:
                 bridge: https://bridge.krateo-system.svc:8080/bridge/api
                 #api: https://api-service.krateo-system.svc:8080/api/v1
-                api: http://api-gateway-nginx.krateo-system.svc/api/v1
+                api: http://shipyard-controller.krateo-system.svc:8080/v1
 
       patches:
         - fromFieldPath: "spec.krateo-dashboard.version"
