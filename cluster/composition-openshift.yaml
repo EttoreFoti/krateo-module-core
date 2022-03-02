@@ -2991,7 +2991,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3007,13 +3007,13 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     containers:
                       - name: api-service
-                        image: docker.io/keptn/api:0.13.0
+                        image: docker.io/keptn/api:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3062,7 +3062,7 @@ spec:
                             value: info
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3093,7 +3093,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -3161,7 +3161,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3177,14 +3177,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-default
                     containers:
                       - name: approval-service
-                        image: docker.io/keptn/approval-service:0.13.0
+                        image: docker.io/keptn/approval-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3216,7 +3216,7 @@ spec:
                             value: info
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         lifecycle:
                           preStop:
                             exec:
@@ -3255,7 +3255,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -3323,7 +3323,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3342,13 +3342,13 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     # initContainers:
                     #   - name: change-user-init
-                    #     image: docker.io/keptn/configuration-service:0.13.0
+                    #     image: docker.io/keptn/configuration-service:0.13.1
                     #     securityContext: {}
                     #     volumeMounts:
                     #       - mountPath: /data/config
@@ -3359,7 +3359,7 @@ spec:
                     #       - chown -R 1001 /data/config
                     containers:
                       - name: configuration-service
-                        image: docker.io/keptn/configuration-service:0.13.0
+                        image: docker.io/keptn/configuration-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3437,7 +3437,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3453,13 +3453,13 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     containers:
                       - name: remediation-service
-                        image: docker.io/keptn/remediation-service:0.13.0
+                        image: docker.io/keptn/remediation-service:0.13.1
                         imagePullPolicy: IfNotPresent
                         livenessProbe:
                           httpGet:
@@ -3491,7 +3491,7 @@ spec:
                             value: "production"
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         lifecycle:
                           preStop:
                             exec:
@@ -3530,7 +3530,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -3600,7 +3600,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3616,13 +3616,13 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     containers:
                       - name: bridge
-                        image: docker.io/keptn/bridge2:0.13.0
+                        image: docker.io/keptn/bridge2:0.13.1
                         imagePullPolicy: IfNotPresent
                         env:
                           - name: API_URL
@@ -3633,7 +3633,7 @@ spec:
                                 name: keptn-api-token
                                 key: keptn-api-token
                           - name: CLI_DOWNLOAD_LINK
-                            value: "https://github.com/keptn/keptn/releases/tag/0.13.0"
+                            value: "https://github.com/keptn/keptn/releases/tag/0.13.1"
                           - name: INTEGRATIONS_PAGE_LINK
                             value: "https://get.keptn.sh/integrations.html"
                           - name: ENABLE_VERSION_CHECK
@@ -3760,7 +3760,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3776,14 +3776,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-default
                     containers:
                       - name: mongodb-datastore
-                        image: docker.io/keptn/mongodb-datastore:0.13.0
+                        image: docker.io/keptn/mongodb-datastore:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3833,7 +3833,7 @@ spec:
                             value: info
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -3872,7 +3872,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -3940,7 +3940,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -3956,13 +3956,13 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     containers:
                       - name: lighthouse-service
-                        image: docker.io/keptn/lighthouse-service:0.13.0
+                        image: docker.io/keptn/lighthouse-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4002,7 +4002,7 @@ spec:
                             value: info
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4041,7 +4041,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -4110,7 +4110,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -4129,14 +4129,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-secret-service
                     containers:
                       - name: secret-service
-                        image: docker.io/keptn/secret-service:0.13.0
+                        image: docker.io/keptn/secret-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4205,7 +4205,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -4224,14 +4224,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-shipyard-controller
                     containers:
                       - name: shipyard-controller
-                        image: docker.io/keptn/shipyard-controller:0.13.0
+                        image: docker.io/keptn/shipyard-controller:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4295,7 +4295,7 @@ spec:
                           preStop:
                             exec:
                               command: ["/bin/sleep", "20"]
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4362,7 +4362,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -4381,14 +4381,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-default
                     containers:
                       - name: statistics-service
-                        image: docker.io/keptn/statistics-service:0.13.0
+                        image: docker.io/keptn/statistics-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4438,7 +4438,7 @@ spec:
                             cpu: "100m"
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         lifecycle:
                           preStop:
                             exec:
@@ -4479,7 +4479,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
@@ -4548,7 +4548,7 @@ spec:
                   app.kubernetes.io/managed-by: Helm
                   app.kubernetes.io/part-of: keptn-krateo-system
                   app.kubernetes.io/component: control-plane
-                  app.kubernetes.io/version: 0.13.0
+                  app.kubernetes.io/version: 0.13.1
                   helm.sh/chart: control-plane-0.1.0
               spec:
                 selector:
@@ -4567,14 +4567,14 @@ spec:
                       app.kubernetes.io/managed-by: Helm
                       app.kubernetes.io/part-of: keptn-krateo-system
                       app.kubernetes.io/component: control-plane
-                      app.kubernetes.io/version: 0.13.0
+                      app.kubernetes.io/version: 0.13.1
                       helm.sh/chart: control-plane-0.1.0
                   spec:
                     securityContext: {}
                     serviceAccountName: keptn-webhook-service
                     containers:
                       - name: webhook-service
-                        image: docker.io/keptn/webhook-service:0.13.0
+                        image: docker.io/keptn/webhook-service:0.13.1
                         livenessProbe:
                           httpGet:
                             path: /health
@@ -4606,7 +4606,7 @@ spec:
                             value: info
                         securityContext: {}
                       - name: distributor
-                        image: docker.io/keptn/distributor:0.13.0
+                        image: docker.io/keptn/distributor:0.13.1
                         lifecycle:
                           preStop:
                             exec:
@@ -4647,7 +4647,7 @@ spec:
                               fieldRef:
                                 fieldPath: metadata.labels['app.kubernetes.io/version']
                           - name: DISTRIBUTOR_VERSION
-                            value: 0.13.0
+                            value: 0.13.1
                           - name: LOCATION
                             valueFrom:
                               fieldRef:
