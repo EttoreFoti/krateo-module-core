@@ -433,6 +433,8 @@ spec:
           toFieldPath: "spec.forProvider.values.grafana.token"
         - fromFieldPath: "spec.prometheus.target"
           toFieldPath: "spec.forProvider.values.prometheus.target"
+        - fromFieldPath: "spec.prometheus.token"
+          toFieldPath: "spec.forProvider.values.prometheus.token"
         - fromFieldPath: "spec.providers.github.token"
           toFieldPath: "spec.forProvider.values.providers.github.token"
         - fromFieldPath: "spec.providers.github.clientId"
