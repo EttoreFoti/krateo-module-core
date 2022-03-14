@@ -275,10 +275,16 @@ spec:
                         options:
                           description: ldap users
                           type: object
-                          # properties:
-                          #   filter:
-                          #     description: ldap users filter
-                          #     type: string
+                          properties:
+                            filter:
+                              description: ldap users filter
+                              type: string
+                            scope:
+                              description: ldap users scope
+                              type: string
+                            attributes:
+                              description: ldap users attributes
+                              type: string
                     groups:
                       description: ldap groups
                       type: object
@@ -289,10 +295,16 @@ spec:
                         options:
                           description: ldap users
                           type: object
-                          # properties:
-                          #   filter:
-                          #     description: ldap groups filter
-                          #     type: string
+                          properties:
+                            filter:
+                              description: ldap groups filter
+                              type: string
+                            scope:
+                              description: ldap groups scope
+                              type: string
+                            attributes:
+                              description: ldap groups attributes
+                              type: string
                 argo-cd:
                   description: Argo-cd helm chart values
                   type: object
