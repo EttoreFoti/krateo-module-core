@@ -284,7 +284,7 @@ spec:
                               type: string
                             attributes:
                               description: ldap users attributes
-                              type: string
+                              type: array
                     groups:
                       description: ldap groups
                       type: object
@@ -304,7 +304,7 @@ spec:
                               type: string
                             attributes:
                               description: ldap groups attributes
-                              type: string
+                              type: array
                 argo-cd:
                   description: Argo-cd helm chart values
                   type: object
