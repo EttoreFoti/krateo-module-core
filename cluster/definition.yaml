@@ -300,12 +300,6 @@ spec:
                             scope:
                               description: ldap users scope
                               type: string
-                            attributes:
-                              description: ldap users attributes
-                              type: array
-                              items:
-                                description: attribute
-                                type: string
                     groups:
                       description: ldap groups
                       type: object
@@ -323,12 +317,6 @@ spec:
                             scope:
                               description: ldap groups scope
                               type: string
-                            attributes:
-                              description: ldap groups attributes
-                              type: array
-                              items:
-                                description: attribute
-                                type: string
                 argo-cd:
                   description: Argo-cd helm chart values
                   type: object
