@@ -2870,7 +2870,7 @@ spec:
                             subPath:
                     volumes:
                       - name: datadir
-                        emptyDir: {}
+                        # emptyDir: {}
                         persistentVolumeClaim:
                           claimName: keptn-mongo
       patches:
@@ -3414,7 +3414,7 @@ spec:
                         securityContext: {}
                     volumes:
                       - name: configuration-volume
-                        emptyDir: {}
+                        # emptyDir: {}
                         persistentVolumeClaim:
                           claimName: configuration-volume
                     serviceAccountName: keptn-configuration-service
