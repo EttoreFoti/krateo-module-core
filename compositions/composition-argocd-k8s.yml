@@ -1,13 +1,13 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: argocd.k8s.core.modules.krateo.io
+  name: argocds-k8s.core.modules.krateo.io
   labels:
     platform: kubernetes
 spec:
   writeConnectionSecretsToNamespace: krateo-system
   compositeTypeRef:
-    apiVersion: modules.krateo.io/v1alpha1
+    apiVersion: argocds-k8s.core.modules.krateo.io/v1alpha1
     kind: ArgoCD
   resources:
     - base:

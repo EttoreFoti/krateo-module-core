@@ -5,7 +5,7 @@ metadata:
 spec:
   compositionSelector:
     matchLabels:
-      platform: openshift
+      platform: kubernetes
   organization: Krateo PlatformOps Company
   frontendUrl: https://krateo-dashboard.krateo.io
   frontend:
@@ -26,9 +26,8 @@ spec:
       token: xx
   argo-cd:
     helmRelease:
-      forProvider:
-        chart:
-          version: 3.33.1
+      chart:
+        version: 3.33.1
   krateo-dashboard:
     frontend:
       image:

@@ -28,7 +28,7 @@ spec:
         - type: None
     - base: #TODO check if that's okay, we don't want to set anything here because we have everything set in the composition for Argo
         # also if we want to overwrite some parameters it should be done only from the claim
-        apiVersion: argocd.k8s.core.modules.krateo.io
+        apiVersion: argocds-k8s.core.modules.krateo.io
         kind: ArgoCD
 
     - base:
