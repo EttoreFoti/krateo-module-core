@@ -39,8 +39,8 @@ jobs:
       - name: Push
         uses: crossplane-contrib/xpkg-action@v0.2.0
         with:
-          command: push configuration -f package.xpkg ettorefoti/krateo-test:${{ steps.tagger.outputs.VERSION_TAG }}
+          command: push configuration -f package.xpkg registry.hub.docker.com/ettorefoti/krateo-test:${{ steps.tagger.outputs.VERSION_TAG }}
       - name: Push Latest
         uses: crossplane-contrib/xpkg-action@v0.2.0
         with:
-          command: push configuration -f package.xpkg ettorefoti/krateo-test
+          command: push configuration -f package.xpkg registry.hub.docker.com/ettorefoti/krateo-test
