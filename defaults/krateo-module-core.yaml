@@ -25,7 +25,10 @@ spec:
       clientSecret: xx
       token: xx
   argo-cd:
-    version: 3.33.1
+    helmRelease:
+      forProvider:
+        chart:
+          version: 3.33.1
   krateo-dashboard:
     frontend:
       image:
