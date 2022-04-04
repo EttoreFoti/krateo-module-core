@@ -103,7 +103,6 @@ spec:
             - type: string
               string:
                 fmt: "%s-argocd"
-        - fromFieldPath: "spec.deploymentObject." #TODO because if we ant to change certain parameters we can do it from here without touching neither the definition or the composition default values
         # - fromFieldPath: "spec.argo-cd.redis.securityContext"
         #   toFieldPath: "spec.forProvider.values.redis.securityContext"
         # - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"

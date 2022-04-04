@@ -69,13 +69,13 @@ spec:
                     cpu: 10m
                     memory: 64Mi
       patches:
-        - fromFieldPath: "spec.argo-cd.version"
+        - fromFieldPath: "spec.helmRelease.forProvider.chart.version"
           toFieldPath: "spec.forProvider.chart.version"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext"
+        - fromFieldPath: "spec.helmRelease.forProvider.redis.securityContext"
           toFieldPath: "spec.forProvider.values.redis.securityContext"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
+        - fromFieldPath: "spec.helmRelease.forProvider.redis.securityContext.runAsNonRoot"
           toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
-        - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
+        - fromFieldPath: "spec.helmRelease.forProvider.redis.securityContext.runAsUser" #TODO add to definition check what's the format
           toFieldPath: "spec.forProvider.values.redis.securityContext.runAsUser"
         - fromFieldPath: metadata.name
           toFieldPath: spec.providerConfigRef.name
