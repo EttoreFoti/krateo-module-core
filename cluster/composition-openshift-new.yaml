@@ -54,19 +54,6 @@ spec:
               repository: https://krateoplatformops.github.io/krateo-dashboard
               version: 0.3.113
             namespace: krateo-system
-            set:
-              - name: keptn.bridgeToken
-                valueFrom:
-                  secretKeyRef:
-                    name: bridge-credentials
-                    namespace: krateo-system
-                    key: BASIC_AUTH_PASSWORD
-              - name: keptn.apiToken
-                valueFrom:
-                  secretKeyRef:
-                    name: keptn-api-token
-                    namespace: krateo-system
-                    key: keptn-api-token
             values:
               postgresql:
                 volumePermissions:
@@ -80,11 +67,6 @@ spec:
                     enabled: false
                 containerSecurityContext:
                   enabled: false
-              keptn:
-                # bridge: http://api-gateway-nginx.krateo-system.svc/api/controlPlane/v1/
-                #api: https://api-service.krateo-system.svc:8080/api/v1
-                api: http://api-gateway-nginx.krateo-system.svc/api/
-
       patches:
         - fromFieldPath: "spec.krateo-dashboard.version"
           toFieldPath: "spec.forProvider.chart.version"
