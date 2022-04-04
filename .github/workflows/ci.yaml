@@ -26,7 +26,7 @@ jobs:
         #        if: env.DOCKER_USR != ''
         with:
           registry: registry.hub.docker.com
-          username: ettorefoti9@gmail.com
+          username: ettorefoti
           password: ${{ secrets.DOCKERHUB }}
       - name: Discover github workspace
         run: cat /home/runner/work/krateo-module-core/krateo-module-core/cluster/definition.yaml
