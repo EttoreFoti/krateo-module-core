@@ -1,0 +1,274 @@
+---
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: argocd.ocp.core.modules.krateo.io
+  labels:
+    platform: openshift
+spec:
+  group: core.modules.krateo.io
+  names:
+    kind: ArgoCD
+    plural: ArgoCDs
+    versions:
+      - name: v1alpha1
+        served: true
+        referenceable: true
+        schema:
+          openAPIV3Schema:
+            type: object
+            properties:
+              deploymentObject:
+                namespace:
+                  type: string
+                  description: Namespace for ArgoCD deployment
+                spec:
+                  type: object
+                  properties:
+                    forProvider.manifest.spec:
+                      type: object
+                      description: Configuration parameters for ArgoCD deployment (spec, dex, ha, etc ==> look ArgoCD definition)
+                      properties:
+                        controller:
+                          type: object
+                          properties:
+                            resources:
+                              type: object
+                              description: resource definition for controller
+                              properties:
+                                cpu:
+                                  type: string
+                                  description: cpu requirements for controller
+                                memory:
+                                  type: string
+                                  description: memory requirements
+                            requests:
+                              type: object
+                              description: resource definition for controller
+                              properties:
+                                cpu:
+                                  type: string
+                                  description: cpu requirements for controller
+                                memory:
+                                  type: string
+                                  description: memory requirements
+                        dex:
+                          type: object
+                          properties:
+                            resources:
+                              limits:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                              requests:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                              openShiftOAuth:
+                                type: bool
+                        ha:
+                          type: object
+                          properties:
+                            resources:
+                              limits:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                              requests:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                            enabled:
+                              type: bool
+                        redis:
+                          type: object
+                          properties:
+                            resources:
+                              limits:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                              requests:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                        repo:
+                          type: object
+                          properties:
+                            resources:
+                              limits:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                              requests:
+                                type: object
+                                description: resource definition for controller
+                                properties:
+                                  cpu:
+                                    type: string
+                                    description: cpu requirements for controller
+                                  memory:
+                                    type: string
+                                    description: memory requirements
+                        server:
+                          type: object
+                          properties:
+                            rbacConfig:
+                              type: object
+                              description: rbac config
+                              properties:
+                                policy.default:
+                                  type: string
+                            config:
+                              type: object
+                              properties:
+                                accounts.krateo-dashboard:
+                                  type: string
+                                accounts.krateo-dashboard.enabled:
+                                  type: bool
+                            resoruces:
+                              type: object
+                              properties:
+                                limits:
+                                  type: object
+                                  properties:
+                                    cpu:
+                                      type: string
+                                      description: cpu requirements for controller
+                                    memory:
+                                      type: string
+                                      description: memory requirements
+                                requests:
+                                  type: object
+                                  properties:
+                                    cpu:
+                                      type: string
+                                      description: cpu requirements for controller
+                                    memory:
+                                      type: string
+                                      description: memory requirements
+                            route:
+                              type: object
+                              properties:
+                                enabled:
+                                  type: bool
+              providerConfig:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      serverUrl:
+                        type: string
+                      credentials:
+                        type: object
+                        properties:
+                          source:
+                            type: string
+                          secretRef:
+                            type: object
+                            properties:
+                              namespace:
+                                type: string
+                              name:
+                                type: string
+                              key:
+                                type: string
+                      debugClient:
+                        type: boolean
+              configMapObject:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      forProvider:
+                        type: object
+                        properties:
+                          manifest:
+                            type: object
+                            properties:
+                              metadata:
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                  namespace:
+                                    type: string
+                                  labels:
+                                    type: object
+                                    properties:
+                                      app.kubernetes.io/name:
+                                        type: string
+                                      app.kubernetes.io/partof:
+                                        type: string
+                              data:
+                                type: object
+                                properties:
+                                  accounts.krateo-dashboard:
+                                    type: string
+              token:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      forProvider:
+                        type: object
+                        properties:
+                          expiresIn:
+                            type: string
+                          account:
+                            type: string
+                          writeTokenSecretToRef:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              namespace:
+                                type: string
+                              key:
+                                type: string
+

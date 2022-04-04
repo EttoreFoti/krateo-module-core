@@ -1,0 +1,242 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: argocd.k8s.core.modules.krateo.io
+  labels:
+    platform: kubernetes
+spec:
+  writeConnectionSecretsToNamespace: krateo-system
+  compositeTypeRef:
+    apiVersion: modules.krateo.io/v1alpha1
+    kind: ArgoCD
+  resources:
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              kind: ArgoCD
+              apiVersion: argoproj.io/v1alpha1
+              metadata:
+                # name: krateo-argocd
+                namespace: krateo-system
+              spec:
+                controller:
+                  resources:
+                    limits:
+                      cpu: 2000m
+                      memory: 2048Mi
+                    requests:
+                      cpu: 250m
+                      memory: 1024Mi
+                dex:
+                  openShiftOAuth: true
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                ha:
+                  enabled: false
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                # rbac:
+                #   defaultPolicy: ""
+                #   policy: |
+                #     g, system:cluster-admins, role:admin
+                #   scopes: "[groups]"
+                redis:
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 250m
+                      memory: 128Mi
+                repo:
+                  resources:
+                    limits:
+                      cpu: 1000m
+                      memory: 1024Mi
+                    requests:
+                      cpu: 250m
+                      memory: 256Mi
+                server:
+                  rbacConfig:
+                    policy.default: "role:admin"
+                  config:
+                    accounts.krateo-dashboard: apiKey, login
+                    accounts.krateo-dashboard.enabled: "true"
+                  resources:
+                    limits:
+                      cpu: 500m
+                      memory: 256Mi
+                    requests:
+                      cpu: 125m
+                      memory: 128Mi
+                  route:
+                    enabled: true
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-k8s-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-operator-argocd"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.manifest.metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd"
+        - fromFieldPath: "spec.deploymentObject." #TODO because if we ant to change certain parameters we can do it from here without touching neither the definition or the composition default values
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext"
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsNonRoot"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext.runAsNonRoot"
+        # - fromFieldPath: "spec.argo-cd.redis.securityContext.runAsUser"
+        #   toFieldPath: "spec.forProvider.values.redis.securityContext.runAsUser"
+    - base:
+        apiVersion: pkg.crossplane.io/v1alpha1
+        kind: ControllerConfig
+        spec:
+          args:
+            - --debug
+          securityContext: {}
+          podSecurityContext: {}
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 50m
+              memory: 64Mi
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-argocd-controllerconfig"
+    - base:
+        apiVersion: pkg.crossplane.io/v1
+        kind: Provider
+        metadata:
+          name: provider-argocd
+        spec:
+          package: "ghcr.io/krateoplatformops/crossplane-provider-argocd-token:0.1.14"
+          packagePullPolicy: Always
+          # packagePullSecrets:
+          #   - name: cr-token
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-argocd"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.controllerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-argocd-controllerconfig"
+    - base:
+        apiVersion: argocd.krateoplatformops.io/v1alpha1
+        kind: ProviderConfig
+        metadata:
+          name: provider-argocd-providerconfig
+        spec:
+          serverUrl: https://krateo-module-core-argocd-server.krateo-system.svc:443
+          credentials:
+            source: Secret
+            secretRef:
+              namespace: krateo-system
+              name: krateo-module-core-argocd-cluster
+              key: admin.password
+          debugClient: true
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-argocd-providerconfig"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.credentials.secretRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-cluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.serverUrl
+          transforms:
+            - type: string
+              string:
+                fmt: "https://%s-argocd-server.krateo-system.svc:443"
+    - base:
+        apiVersion: kubernetes.crossplane.io/v1alpha1
+        kind: Object
+        spec:
+          forProvider:
+            manifest:
+              apiVersion: v1
+              kind: ConfigMap
+              metadata:
+                name: argocd-cm
+                namespace: krateo-system
+                labels:
+                  app.kubernetes.io/name: argocd-cm
+                  app.kubernetes.io/part-of: argocd
+              data:
+                # add an additional local user with apiKey and login capabilities
+                #   apiKey - allows generating API keys
+                #   login - allows to login using UI
+                accounts.krateo-dashboard: apiKey, login
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-k8s-providerconfig-incluster"
+        - fromFieldPath: metadata.name
+          toFieldPath: metadata.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-argocd-cm"
+    - base:
+        apiVersion: argocd.krateoplatformops.io/v1alpha1
+        kind: Token
+        metadata:
+          name: krateo-dashboard-argocd-token
+        spec:
+          forProvider:
+            expiresIn: 0s
+            account: krateo-dashboard
+            writeTokenSecretToRef:
+              name: krateo-dashboard-argocd-token
+              key: authToken
+              namespace: krateo-system
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.providerConfigRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-provider-argocd-providerconfig"

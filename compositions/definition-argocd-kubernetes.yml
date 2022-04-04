@@ -1,0 +1,253 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: argocd.k8s.core.modules.krateo.io
+  labels:
+    platform: kubernetes
+spec:
+  group: core.modules.krateo.io
+  names:
+    kind: ArgoCD
+    plural: ArgoCDs
+    versions:
+      - name: v1alpha1
+        served: true
+        referenceable: true
+        schema:
+          openAPIV3Schema:
+            type: object
+            properties:
+              helmRelease:
+                type: object
+                properties:
+                  forProvider:
+                    type: object
+                    definition: spec.forProvider for releas of argocd through helm
+                    properties:
+                      chart:
+                        type: object
+                        definition: Helm chart version, repo and name
+                        properties:
+                          name:
+                            type: string
+                            definition: Helm Chart Name
+                          repository:
+                            type: string
+                            definition: Helm Chart Repo URL
+                          version:
+                            type: string
+                            definition: Helm Chart Version
+                      namespace:
+                        type: string
+                      values:
+                        type: object
+                        definition: spec.forProvider.values for releas of argocd through helm
+                        properties:
+                          server:
+                            type: object
+                            properties:
+                              rbacConfig:
+                                type: object
+                                properties:
+                                  policy.default:
+                                    type: string
+                              config:
+                                type: object
+                                properties:
+                                  accounts.krateo-dashboard:
+                                    type: string
+                                  accounts.krateo-dashboard.enabled:
+                                    type: boolean
+                              resources:
+                                type: object
+                                properties:
+                                  limits:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                                  requests:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                          controller:
+                            type: object
+                            properties:
+                              resources:
+                                type: object
+                                properties:
+                                  limits:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                                  requests:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                          dex:
+                            type: object
+                            properties:
+                              resources:
+                                type: object
+                                properties:
+                                  limits:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                                  requests:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                          redis:
+                            type: object
+                            properties:
+                              resources:
+                                type: object
+                                properties:
+                                  limits:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                                  requests:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                          repoServer:
+                            type: object
+                            properties:
+                              resources:
+                                type: object
+                                properties:
+                                  limits:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+                                  requests:
+                                    type: object
+                                    properties:
+                                      cpu:
+                                        type: string
+                                      memory:
+                                        type: string
+              controllerConfig:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      args:
+                        type: list #TODO check if correct
+                      securityContext:
+                        type: object
+                        properties:
+                          runAsUser:
+                            type: string
+                          runAsGroup:
+                            type: string
+                          fsGroup:
+                            type: string
+                      podSecurityContext:
+                        type: object
+                          properties:
+                            runAsUser:
+                              type: string
+                            runAsGroup:
+                              type: string
+                            fsGroup:
+                              type: string
+                      resources:
+                        type: object
+                        properties:
+                          limits:
+                            type: object
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+                          requests:
+                            type: object
+                            properties:
+                              cpu:
+                                type: string
+                              memory:
+                                type: string
+              providerArgoCD:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      package:
+                        type: string
+                      packagePullPolicy:
+                        type: string
+              providerConfigArgoCD:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      credentials:
+                        type: object
+                        properties:
+                          source:
+                            type: string
+                          secretRef:
+                            type: object
+                            properties:
+                              namespace:
+                                type: string
+                              name:
+                                type: string
+                              key:
+                                type: string
+              token:
+                type: object
+                properties:
+                  spec:
+                    type: object
+                    properties:
+                      forProvider:
+                        type: object
+                        properties:
+                          expiresIn:
+                            type: string
+                          account:
+                            type: string
+                          writeTokenSecretToRef:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              namespace:
+                                type: string
+                              key:
+                                type: string
+
